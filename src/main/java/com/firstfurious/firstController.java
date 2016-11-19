@@ -167,6 +167,7 @@ public class firstController{
 			jobj.put("ProductDescription", p.getpDescription());
 			jobj.put("ProductQuantity", p.getpQuantity());
 			jobj.put("ProductPrice", p.getpPrice());
+			jobj.put("flag", p.getpImage());
 			jarr.add(jobj);
 		}
 		mav.addObject("Products", jarr.toJSONString());

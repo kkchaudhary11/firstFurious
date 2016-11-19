@@ -43,6 +43,7 @@
 				<th>Product Description</th>
 				<th>Product Quantity</th>
 				<th>Product Price</th>
+				<th>Product Image</th>
 			</tr>
 				<tr ng-repeat="x in data ">
 					<td>
@@ -53,6 +54,9 @@
 					<td>{{x.ProductDescription}}</td>
 					<td>{{x.ProductQuantity}}</td>
 					<td>{{x.ProductPrice}}</td>
+					<td><img
+						ng-src="${pageContext.request.contextPath}/{{ x.flag }}" height=" 50px" width="100px"></td>
+
 					<td><a href="${pageContext.request.contextPath}/updateproduct/{{x.ProductId}}" class="btn btn-primary btn-xs">UPDATE</a></td>
 					<td><a href="${pageContext.request.contextPath}/DeleteProductFromDB/{{x.ProductId}}" class="btn btn-danger btn-xs">DELETE</a></td>						
 					</tr>
