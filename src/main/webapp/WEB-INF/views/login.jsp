@@ -18,26 +18,38 @@
 	<hr>
 
 	<div class="col-md-4 col-md-offset-4">
-		<form id="loginform" class="form-horizontal" role="form">
+	
+			<c:if test="${param.error != null}">
+				<p class="alert alert-danger">
+					<span>Invalid Username and password.</span>
+				</p>
+			</c:if>
+			<c:if test="${param.logout != null}">
+				<p class="alert alert-success">
+					<span>You have been logged out successfully.</span>
+				</p>
+			</c:if>
+	
+	
+		<form action="login" method="post" class="form-horizontal" role="form">
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
-					class="glyphicon glyphicon-user"></i></span> <input id="signin-username"
-					type="text" class="form-control" name="username" value=""
-					placeholder="username or email">
+					class="glyphicon glyphicon-user"></i></span> <input 
+					type="text" class="form-control" name="Username" 
+					placeholder="Username or Email">
 			</div>
 
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
-					class="glyphicon glyphicon-lock"></i></span> <input id="signin-password"
-					type="password" class="form-control" name="password"
-					placeholder="password">
+					class="glyphicon glyphicon-lock"></i></span> <input
+					type="password" class="form-control" name="Password"
+					placeholder="Password">
 			</div>
 			
 			<div style="margin-top: 10px" class="form-group">
 				<!-- Button -->
 				<div class="col-sm-12 controls">
-					<a id="btn-login" href="#" class="btn btn-warning btn-block">Sign
-						In </a>
+					<input type="submit" class="btn btn-warning btn-block" vaue="Login"/>
 				</div>
 			</div>
 		</form>

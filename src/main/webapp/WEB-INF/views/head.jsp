@@ -101,8 +101,8 @@ body {
 					href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>
 				<li
-					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/logIn.jsp'}">class="active"</c:if>><a
-					href="${pageContext.request.contextPath}/signin"><span class="glyphicon glyphicon-log-in"></span>
+					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
+					href="${pageContext.request.contextPath}/loginpage"><span class="glyphicon glyphicon-log-in"></span>
 						Sign In</a></li>
 			</ul>
 		</div>

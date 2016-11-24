@@ -8,8 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +31,9 @@ import com.firstfurious.category.Category;
 import com.firstfurious.category.CategoryDAO;
 import com.firstfurious.product.Product;
 import com.firstfurious.product.ProductDAO;
+import com.firstfurious.user.User;
+import com.firstfurious.user.UserDAO;
+import com.firstfurious.userRole.UserRoleDAO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -36,6 +45,10 @@ public class firstController{
 	CategoryDAO cdao;
 	@Autowired
 	ProductDAO pdao;
+	@Autowired
+	UserDAO udao;
+	@Autowired
+	UserRoleDAO urdao;
 	
 	@Autowired
 	ServletContext context;
@@ -43,6 +56,7 @@ public class firstController{
 	@RequestMapping("/")
 	public ModelAndView index(){
 		//request handler method
+		urdao.generateUserRoles();
 		ModelAndView model = new ModelAndView("index");
 		return model;
 	}
@@ -50,6 +64,7 @@ public class firstController{
 	@RequestMapping("/index")
 	public ModelAndView home(){
 		//request handler method
+
 		ModelAndView model = new ModelAndView("index");
 		return model;
 	}
@@ -115,12 +130,10 @@ public class firstController{
 	
 	@RequestMapping(value="/AddCategoryToDB" , method=RequestMethod.POST)
 	public String AddCategoryToDB( @ModelAttribute("Category") Category c ){
-		ModelAndView model = new ModelAndView("allCategories");
-		
+				
 		//System.out.println(c.getcName());
-		
 		cdao.insert(c);
-		model.addObject("Category", new Category());
+		
 		return "redirect:/allCategories";
 	}
 	
@@ -184,10 +197,10 @@ public class firstController{
 	
 	@RequestMapping(value="/AddProductToDB" , method=RequestMethod.POST)
 	public String AddProductToDB( @ModelAttribute("Product") Product p ){
-		ModelAndView mav = new ModelAndView("allProducts");
+		
 		/*System.out.println(p.getpName());*/
 		pdao.insert(p);
-		mav.addObject("Product", new Product());
+		
 		Product i1 = pdao.getProductWithMaxId();
 
 		System.out.println(i1.getpId());
@@ -253,24 +266,126 @@ public class firstController{
 	
 	@RequestMapping(value="/UpdateProductToDB" , method=RequestMethod.POST)
 	public String UpdateProductToDB( @ModelAttribute("Product") Product p ) {
-			
-		pdao.update(p);
+		
+		try {
+			String path = context.getRealPath("/");
+
+			System.out.println(path);
+
+			File directory = null;
+
+			// System.out.println(ps.getProductWithMaxId());
+
+			if (p.getProductFile().getContentType().contains("image")) {
+				directory = new File(path + "\\resources\\images");
+
+				System.out.println(directory);
+
+				byte[] bytes = null;
+				File file = null;
+				bytes = p.getProductFile().getBytes();
+
+				if (!directory.exists())
+					directory.mkdirs();
+
+				file = new File(directory.getAbsolutePath() + System.getProperty("file.separator") + "image_"
+						+ p.getpId() + ".jpg");
+
+				System.out.println(file.getAbsolutePath());
+
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+				stream.write(bytes);
+				stream.close();
+
+			}
+
+			p.setpImage("resources/images/image_" + p.getpId() + ".jpg");
+
+			pdao.update(p);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		
 		return "redirect:/allProducts";
 	}	
 	
-	
+	//Sign Up Section
 	
 	@RequestMapping("/signup")
 	public ModelAndView signup(){
 		ModelAndView model = new ModelAndView("signUp");
+		model.addObject("User", new User());
 		return model;
 	}
 	
-	@RequestMapping("/signin")
+	@RequestMapping(value="/AddUserToDB" , method=RequestMethod.POST)
+	public ModelAndView AddUserToDB(@Valid @ModelAttribute("User") User user, BindingResult bind) {
+		
+		ModelAndView mav = new ModelAndView("signUp");
+
+		System.out.println("In User Insert");
+
+		if (bind.hasErrors()) {
+			mav.addObject("User", user);
+		} else {
+			if (user.getuPassword().equals(user.getuCPassword())) {
+				List<User> list = udao.getAllUsers();
+
+				System.out.println(list);
+
+				boolean usermatch = false;
+
+				for (User u : list) {
+					if (u.getuName().equals(user.getuName())) {
+						usermatch = true;
+						break;
+					}
+				}
+
+				if (usermatch == false) {
+					udao.insertUser(user);
+
+					mav.addObject("User", new User());
+
+					mav.addObject("success", "success");
+				} else {
+					mav.addObject("User", user);
+
+					mav.addObject("useralreadyexists", "useralreadyexists");
+				}
+			} else {
+				mav.addObject("User", user);
+
+				mav.addObject("passwordmismatch", "passwordmismatch");
+			}
+
+		}
+		
+		return mav;
+	}
+	
+	//Login Section
+	
+	@RequestMapping(value="/loginpage", method = RequestMethod.GET)
 	public ModelAndView login(){
-		ModelAndView model = new ModelAndView("signIn");
+		ModelAndView model = new ModelAndView("login");
 		return model;
 	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) 
+		{
+
+			System.out.println("In LogOut");
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+
+		}
+
+		return "index";
+	}
+
 	
 }

@@ -44,12 +44,11 @@
 				<th>Product Quantity</th>
 				<th>Product Price</th>
 				<th>Product Image</th>
+				<th>Update</th>
+				<th>Delete</th>
 			</tr>
 				<tr ng-repeat="x in data ">
-					<td>
-				
-					{{x.ProductName}}
-					</td>
+					<td>{{x.ProductName}}</td>
 					<td>{{x.ProductCategory}}</td>
 					<td>{{x.ProductDescription}}</td>
 					<td>{{x.ProductQuantity}}</td>

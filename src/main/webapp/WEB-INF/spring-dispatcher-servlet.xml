@@ -52,6 +52,8 @@
 		<list>
 		<value>com.firstfurious.category</value>
 		<value>com.firstfurious.product</value>
+		<value>com.firstfurious.user</value>
+		<value>com.firstfurious.userRole</value>
 	
 		</list>
 		</property>

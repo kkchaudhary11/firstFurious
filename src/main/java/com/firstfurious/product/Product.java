@@ -17,7 +17,9 @@ public class Product {
 	private String pPrice;
 	private String pQuantity;
 	private String pImage;
-	
+	@Transient
+	private MultipartFile ProductFile;
+
 
 	
 	//getters and setters 
@@ -68,9 +70,7 @@ public class Product {
 		return "Product [pId=" + pId + ", pName=" + pName + "]";
 	}
 	
-	@Transient
-	private MultipartFile ProductFile;
-
+	
 	public MultipartFile getProductFile() {
 		return ProductFile;
 	}

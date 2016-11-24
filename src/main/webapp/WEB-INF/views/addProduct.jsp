@@ -19,6 +19,7 @@
 	</div>
 	<hr>
 
+<div class="container-fluid">
 	<div class="col-md-4 col-md-offset-4">
 		<form:form class="form-horizontal" role="form" method="post" action="AddProductToDB" modelAttribute="Product" enctype="multipart/form-data">
 			<div style="margin-bottom: 25px" class="col-lg-12">
@@ -38,21 +39,20 @@
 			</div>
 			
 			<div style="margin-bottom: 25px" class="col-lg-12">
-				<label class="form-control"><span
-							id="file_display1">Choose Image</span><span
-							style="position: relative;"><form:input path="ProductFile"
-									onchange="changeFileDisplay1();" type="file" style="opacity:0;"
-									class="form-control" id="imageFile1" /></span></label> <script
-							type="text/javascript">
-										function changeFileDisplay1() {
-											document
-													.getElementById("file_display1").innerHTML = $(
-													'#imageFile1').val();
-											;
-										}
-									</script>
 			
+			<label class="btn btn-default btn-file">
+			   Select Product Image <form:input path="ProductFile" type="file" style="display: none;" id="imageFile" 
+			   onchange="filePathDisp()" /> 
+			</label><br>
+			<span id =file_location>&nbsp</span>
+			<script type="text/javascript">
+					function filePathDisp() {
+							document.getElementById("file_location").innerHTML = $('#imageFile').val();}
+			</script> 
+									
+						
 			</div>
+		
 			
 			<div style="margin-top: 10px" class="col-lg-12">
 				<!-- Button -->
@@ -61,6 +61,7 @@
 							</div>
 		</form:form>
 	</div>
+</div>	
 
 	<c:import url="/foot" />
 

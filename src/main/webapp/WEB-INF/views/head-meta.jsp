@@ -6,6 +6,8 @@
 
 <link rel="shortcut icon" href="resources/images/logo.png" />
 
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/references/css/firstFurious.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/references/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/references/css/font-awesome.min.css" />
