@@ -25,9 +25,27 @@
 			<div style="margin-bottom: 25px" class="col-lg-12">
 				<form:input path="pName" type="text" class="form-control" placeholder="Enter Product Name" />
 			</div>
-			<div style="margin-bottom: 25px" class="col-lg-12">
-				<form:input path="pCategory" type="text" class="form-control" placeholder="Enter Product Category" />
-			</div>
+			
+			  <div style="margin-bottom: 25px" class="col-lg-12">
+			<form:select path="pCategory" class="form-control">
+                    		
+                    	<c:choose>
+                    	<c:when test="${not empty AllCategories }">
+                    	<c:forEach var="cat" items="${AllCategories}">
+                    	<form:option value="${cat}"/>
+                    	</c:forEach>
+                    	</c:when>
+                    	
+                    	<c:otherwise>
+                    	   	<form:option value="None"/>
+                    	</c:otherwise>
+                    	
+                    	</c:choose>
+                    		
+                    		
+                    	</form:select>
+             				</div>
+                  
 			<div style="margin-bottom: 25px" class="col-lg-12">
 				<form:input path="pDescription" type="text" class="form-control" placeholder="Enter Product Description" />
 			</div>

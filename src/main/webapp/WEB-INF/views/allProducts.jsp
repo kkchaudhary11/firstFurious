@@ -24,11 +24,21 @@
 	</div>
 	<hr>
 
+		<%
+			if(request.isUserInRole("ADMIN"))
+			{
+		%>
+					
+
 	<div class="container-fluid">
 		<div class="col-md-4 col-md-offset-4">
 			<a href="addProduct" class="btn btn-warning btn-block">Add Product</a>
 		</div>
 	</div>
+	
+		<%
+				}
+		%>
 	
 	<br><br>
 	
@@ -44,8 +54,7 @@
 				<th>Product Quantity</th>
 				<th>Product Price</th>
 				<th>Product Image</th>
-				<th>Update</th>
-				<th>Delete</th>
+			
 			</tr>
 				<tr ng-repeat="x in data ">
 					<td>{{x.ProductName}}</td>
@@ -56,8 +65,17 @@
 					<td><img
 						ng-src="${pageContext.request.contextPath}/{{ x.flag }}" height=" 50px" width="100px"></td>
 
+					<%
+						if(request.isUserInRole("ADMIN"))
+						{
+					%>
+					
 					<td><a href="${pageContext.request.contextPath}/updateproduct/{{x.ProductId}}" class="btn btn-primary btn-xs">UPDATE</a></td>
 					<td><a href="${pageContext.request.contextPath}/DeleteProductFromDB/{{x.ProductId}}" class="btn btn-danger btn-xs">DELETE</a></td>						
+					<%
+					}
+					%>
+					
 					</tr>
 			</tbody>
 		</table>

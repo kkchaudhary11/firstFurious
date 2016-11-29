@@ -29,8 +29,28 @@
                  <form:input type="text" path="pName" class="form-control"/>
 				<br>
 				<form:input path="pId" type="hidden" />
+				
 				<form:label path="pName">Product Category</form:label>
-				<form:input type="text" path="pCategory" class="form-control"/>
+				
+			<form:select path="pName" class="form-control" >
+                    		
+                    	<c:choose>
+                    	<c:when test="${not empty AllCategories }">
+                    	<c:forEach var="cat" items="${AllCategories}">
+                    	<form:option value="${cat}"/>
+                    	</c:forEach>
+                    	</c:when>
+                    	
+                    	<c:otherwise>
+                    	   	<form:option value="None"/>
+                    	</c:otherwise>
+                    	
+                    	</c:choose>
+                    		
+                    		
+                    	</form:select>
+             				
+				
 				<br>
 				<form:label path="pName">Product Description</form:label>
 				<form:input type="text" path="pDescription" class="form-control"/>

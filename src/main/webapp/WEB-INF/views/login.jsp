@@ -49,7 +49,7 @@
 			<div style="margin-top: 10px" class="form-group">
 				<!-- Button -->
 				<div class="col-sm-12 controls">
-					<input type="submit" class="btn btn-warning btn-block" vaue="Login"/>
+					<input type="submit" class="btn btn-warning btn-block" value="Login"/>
 				</div>
 			</div>
 		</form>

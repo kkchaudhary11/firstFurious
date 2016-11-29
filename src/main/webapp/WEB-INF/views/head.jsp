@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -88,15 +87,41 @@ body {
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/contactUs.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/contactus">Contact Us</a></li>
 					
+					<%
+						if(request.isUserInRole("ADMIN"))
+						{
+					%>
+					
+					
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/allCategories.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/allCategories">Categories</a></li>
+					<%
+						}
+					%>
+				
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/allProducts.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/allProducts">Products</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+			
+			
+			<c:choose>
+			<c:when test="${not empty pageContext.request.userPrincipal.name }">
+			
+			<li
+					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
+					href="${pageContext.request.contextPath}/index"><strong>
+						${pageContext.request.userPrincipal.name}</strong></a></li>
 				<li
+					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
+					href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-in"></span>
+						Sign Out</a></li>
+			</c:when>
+			
+			<c:otherwise>
+			<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>
@@ -104,6 +129,11 @@ body {
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/loginpage"><span class="glyphicon glyphicon-log-in"></span>
 						Sign In</a></li>
+			</c:otherwise>
+			
+			</c:choose>
+			
+				
 			</ul>
 		</div>
 	</div>

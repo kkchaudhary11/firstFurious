@@ -139,7 +139,19 @@ public class firstController{
 	
 	@RequestMapping("/DeleteCategoryFromDB/{cId}")
 	public String DeleteCategory(@PathVariable("cId") int cId){
+		
+		
+		Category c = cdao.getCategory(cId);
 		cdao.delete(cId);
+		
+		List<Product> list = pdao.getProduct();
+		for(Product p : list){
+			if(p.getpCategory().equals(c.getcName())){
+				p.setpCategory("-");
+				pdao.update(p);
+			}
+		}
+		
 		return "redirect:/allCategories";
 	}
 	
@@ -157,7 +169,19 @@ public class firstController{
 	@RequestMapping(value="/UpdateCategoryToDB" , method=RequestMethod.POST)
 	public String UpdateCategoryToDB( @ModelAttribute("Category") Category c ) {
 		
+		Category cOld = cdao.getCategory(c.getcId());
+		
 		cdao.update(c);
+		
+		List<Product> list = pdao.getProduct();
+		
+		for(Product p : list ){
+			if(p.getpCategory().equals(cOld.getcName())){
+				p.setpCategory(c.getcName());
+				pdao.update(p);
+			}
+		}
+		
 		return "redirect:/allCategories";
 	}	
 	
@@ -192,6 +216,10 @@ public class firstController{
 	public ModelAndView addProducts(){
 		ModelAndView mav = new ModelAndView("addProduct");
 		mav.addObject("Product", new Product());
+		
+		List<Category> list = cdao.getCategory();
+		mav.addObject("AllCategories",list);
+		
 		return mav;
 	}
 	
@@ -261,6 +289,10 @@ public class firstController{
 		//System.out.println(p);
 		
 		mav.addObject("Product", p);
+		
+		List<Category> list = cdao.getCategory();
+		mav.addObject("AllCategories",list);
+		
 		return mav;
 	}
 	
@@ -384,7 +416,7 @@ public class firstController{
 
 		}
 
-		return "index";
+		return "login";
 	}
 
 	
