@@ -36,9 +36,20 @@
 		</div>
 	</div>
 	
+	
 		<%
 				}
 		%>
+		
+		<div class="container-fluid">
+		<div class="col-md-4 col-md-offset-4">
+		<div class="input-group" style="margin-top: 20px">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-search"></i></span> <input
+					type="text" class="form-control"  ng-model="searchText" placeholder="Search Products" autofocus/>
+			</div>
+		</div>
+	</div>
 	
 	<br><br>
 	
@@ -56,7 +67,7 @@
 				<th>Product Image</th>
 			
 			</tr>
-				<tr ng-repeat="x in data ">
+				<tr ng-repeat="x in data | filter:searchText">
 					<td>{{x.ProductName}}</td>
 					<td>{{x.ProductCategory}}</td>
 					<td>{{x.ProductDescription}}</td>

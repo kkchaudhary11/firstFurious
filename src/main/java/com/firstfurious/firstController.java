@@ -53,6 +53,19 @@ public class firstController{
 	@Autowired
 	ServletContext context;
 	
+	public String test() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null && !auth.getName().equals("anonymousUser")) {
+			System.out.println(auth.getName());
+			// System.out.println("User present");
+			return "false";
+		} else {
+			System.out.println("User not present");
+			return "true";
+		}
+
+	}
+
 	@RequestMapping("/")
 	public ModelAndView index(){
 		//request handler method
@@ -417,6 +430,20 @@ public class firstController{
 		}
 
 		return "login";
+	}
+	
+	
+	@RequestMapping(value = "/initiateFlow", method = RequestMethod.GET)
+	public String redirect(HttpServletRequest request) {
+
+		String retval = "";
+
+		if (request.getUserPrincipal() == null)
+			retval = "redirect:/cart?user=none";
+		else
+			retval = "redirect:/cart?user=" + request.getUserPrincipal().getName();
+
+		return retval;
 	}
 
 	

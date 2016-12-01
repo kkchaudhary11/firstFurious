@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="col-md-4 col-md-offset-4">
 			<h3>
-				<strong>UPDATE CATEGORY</strong>
+				<strong>UPDATE PRODUCT</strong>
 			</h3>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 				
 				<form:label path="pName">Product Category</form:label>
 				
-			<form:select path="pName" class="form-control" >
+			<form:select path="pCategory" class="form-control" >
                     		
                     	<c:choose>
                     	<c:when test="${not empty AllCategories }">

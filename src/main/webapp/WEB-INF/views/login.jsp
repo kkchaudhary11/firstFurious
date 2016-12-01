@@ -36,14 +36,14 @@
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input 
 					type="text" class="form-control" name="Username" 
-					placeholder="Username or Email">
+					placeholder="Enter Username" autofocus>
 			</div>
 
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-lock"></i></span> <input
 					type="password" class="form-control" name="Password"
-					placeholder="Password">
+					placeholder="Enter Password">
 			</div>
 			
 			<div style="margin-top: 10px" class="form-group">

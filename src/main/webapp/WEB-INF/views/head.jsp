@@ -111,6 +111,11 @@ body {
 			<c:when test="${not empty pageContext.request.userPrincipal.name }">
 			
 			<li
+					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/initiateFlow.jsp'}">class="active"</c:if>><a
+					href="${pageContext.request.contextPath}/initiateFlow">
+						View Cart	<i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+			
+			<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/index"><strong>
 						${pageContext.request.userPrincipal.name}</strong></a></li>
