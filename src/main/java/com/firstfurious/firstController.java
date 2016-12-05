@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.ModelAndViewResolver;
 
+import com.firstfurious.cart.Cart;
+import com.firstfurious.cart.CartDAO;
 import com.firstfurious.category.Category;
 import com.firstfurious.category.CategoryDAO;
 import com.firstfurious.product.Product;
@@ -49,6 +51,8 @@ public class firstController{
 	UserDAO udao;
 	@Autowired
 	UserRoleDAO urdao;
+	@Autowired
+	CartDAO crdao;
 	
 	@Autowired
 	ServletContext context;
@@ -445,6 +449,69 @@ public class firstController{
 
 		return retval;
 	}
-
 	
+	@RequestMapping(value = "/view/{productID}")
+	public ModelAndView addproduct1(@PathVariable("productID") int prodid) {
+		ModelAndView mav = new ModelAndView("view");
+
+		System.out.println(prodid);
+
+		Product p = pdao.getProduct(prodid);
+
+		if (p != null) {
+
+			mav.addObject("ProductName", p.getpName());
+			mav.addObject("ProductDescription", p.getpDescription());
+			mav.addObject("ProductCategory", p.getpCategory());
+			mav.addObject("ProductPrice", p.getpPrice());
+			mav.addObject("ProductQty", p.getpQuantity());
+			mav.addObject("ProductImg", p.getpImage());
+			mav.addObject("ProductId", p.getpId());
+		
+		}
+
+		return mav;
+	
+		}
+	
+	
+	
+	@RequestMapping(value = "/addToCart")
+	public String addToCart(HttpServletRequest request) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null && !auth.getName().equals("anonymousUser")) {
+			System.out.println(request.getParameter("pid"));
+			System.out.println(request.getParameter("pqty"));
+
+			int qty = 1;
+
+			try {
+				qty = Integer.parseInt(request.getParameter("pqty"));
+
+				if (!(qty >= 1 && qty <= 10))
+					throw new Exception();
+			} catch (Exception e) {
+				System.out.println("Invalid Qty");
+			}
+
+			Cart c = new Cart();
+
+			c.setProductID(request.getParameter("pid"));
+			c.setQty("" + qty);
+
+			Product p = pdao.getProduct(Integer.parseInt(request.getParameter("pid")));
+
+			c.setName(p.getpName());
+			c.setPrice(p.getpPrice());
+
+			c.setUserName(auth.getName());
+
+			crdao.add(c);
+
+		}
+
+		return "redirect:initiateFlow";
+
+		}
 }

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -12,8 +13,6 @@
 .glyphicon.glyphicon-chevron-left, .glyphicon.glyphicon-chevron-right {
 	color: #f26522;
 }
-
-
 
 html {
 	position: relative;
@@ -55,16 +54,14 @@ body {
 }
 
 #fa_color {
-    color: #f26522;
- 
-    font-size: 1.5em;
+	color: #f26522;
+	font-size: 1.5em;
 }
-
 </style>
 
 <!-- navigation bar  -->
 
-<nav class="navbar  navbar-inverse navbar-static-top"  role="navigation">
+<nav class="navbar  navbar-inverse navbar-static-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -73,7 +70,8 @@ body {
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="index" style="margin-top: -10px;"><img
-				src="${pageContext.request.contextPath}/resources/images/logo.png" alt="logo" width="60" height="40"></a>
+				src="${pageContext.request.contextPath}/resources/images/logo.png"
+				alt="logo" width="60" height="40"></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
@@ -86,59 +84,72 @@ body {
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/contactUs.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/contactus">Contact Us</a></li>
-					
-					<%
-						if(request.isUserInRole("ADMIN"))
-						{
-					%>
-					
-					
+
+
+				
+
+				<%
+					if (request.isUserInRole("ADMIN")) {
+				%>
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/allCategories.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/allCategories">Categories</a></li>
-					<%
-						}
-					%>
-				
+				<%
+					}
+				%>
+
+
+
+
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/allProducts.jsp'}">class="active"</c:if>><a
 					href="${pageContext.request.contextPath}/allProducts">Products</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-			
-			
-			<c:choose>
-			<c:when test="${not empty pageContext.request.userPrincipal.name }">
-			
-			<li
+
+
+				<c:choose>
+					<c:when test="${not empty pageContext.request.userPrincipal.name }">
+					
+					<%
+					if (request.isUserInRole("USER")) {
+				%>
+				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/initiateFlow.jsp'}">class="active"</c:if>><a
-					href="${pageContext.request.contextPath}/initiateFlow">
-						View Cart	<i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-			
-			<li
-					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
-					href="${pageContext.request.contextPath}/index"><strong>
-						${pageContext.request.userPrincipal.name}</strong></a></li>
-				<li
-					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
-					href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-in"></span>
-						Sign Out</a></li>
-			</c:when>
-			
-			<c:otherwise>
-			<li
-					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
-					href="${pageContext.request.contextPath}/signup"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li>
-				<li
-					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
-					href="${pageContext.request.contextPath}/loginpage"><span class="glyphicon glyphicon-log-in"></span>
-						Sign In</a></li>
-			</c:otherwise>
-			
-			</c:choose>
-			
-				
+					href="${pageContext.request.contextPath}/initiateFlow"> View
+						Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				</a></li>
+
+				<%
+					}
+				%>
+					
+
+
+						<li
+							<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
+							href="${pageContext.request.contextPath}/index"><strong>
+									${pageContext.request.userPrincipal.name}</strong></a></li>
+						<li
+							<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
+							href="${pageContext.request.contextPath}/logout"><span
+								class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+					</c:when>
+
+					<c:otherwise>
+						<li
+							<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/signUp.jsp'}">class="active"</c:if>><a
+							href="${pageContext.request.contextPath}/signup"><span
+								class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li
+							<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/loginpage.jsp'}">class="active"</c:if>><a
+							href="${pageContext.request.contextPath}/loginpage"><span
+								class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+					</c:otherwise>
+
+				</c:choose>
+
+
 			</ul>
 		</div>
 	</div>

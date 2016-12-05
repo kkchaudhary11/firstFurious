@@ -5,8 +5,11 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@EnableTransactionManagement
 public class CartDAOImpl implements CartDAO{
 	
 	
@@ -52,18 +55,21 @@ public class CartDAOImpl implements CartDAO{
 		
 	}
 
+	@Transactional
 	public void update(Cart cart) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().update(cart);
 		
 	}
 
+	@Transactional
 	public void add(Cart cart) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().save(cart);
 		
 	}
 
+	@Transactional
 	public void delete(int i) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().createQuery("delete from Cart as i where i.ID = :id").setInteger("id", i).executeUpdate();
@@ -71,6 +77,7 @@ public class CartDAOImpl implements CartDAO{
 		
 	}
 
+	@Transactional
 	public void deleteByProductId(int pid) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().createQuery("delete from Cart as i where i.ProductId = :id").setInteger("id", pid).executeUpdate();
@@ -78,7 +85,9 @@ public class CartDAOImpl implements CartDAO{
 		
 	}
 
-	
+
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Cart> getAllProduct() {
 		// TODO Auto-generated method stub
 		return sessionFactory.getCurrentSession().createQuery("from Cart").list();

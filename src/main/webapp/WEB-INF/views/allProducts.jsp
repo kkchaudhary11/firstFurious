@@ -87,6 +87,15 @@
 					}
 					%>
 					
+					<%
+						if(request.isUserInRole("USER")){
+					%>
+					
+					<td><a href="${pageContext.request.contextPath}/view/{{x.ProductId}}" class="btn btn-primary btn-xs">VIEW</a></td>						
+					
+						<%
+					}
+					%>				
 					</tr>
 			</tbody>
 		</table>

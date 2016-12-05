@@ -7,6 +7,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <c:import url="/head-meta"/>
 </head>
+<script type="text/javascript">
+'use strict';
+		var myApp = angular.module('myApp',[]);
+	
+		myApp.factory('UserService', ['$http', '$q', function($http, $q)
+		{
+	 
+    	return {
+         
+    		deleteAllFromCart: function(item){
+                    return $http.post('http://localhost:8090/firstFurious/flows/deleteAllFromCart/', item)
+                            .then(
+                                    function(response){
+                                        return response.data;
+                                    }, 
+                                    function(errResponse){
+                                        console.error('Error while sending data');
+                                        return $q.reject(errResponse);
+                                    }
+                            );
+            }
+    };
+ 
+}]);
+	
+	///////////////
+	
+	
+	myApp.controller("abc",['$scope', 'UserService' ,function($scope , $UserService)
+	{
+		$UserService.deleteAllFromCart();
+	}]); 
+	
+</script>
 <body>
 <c:import url="/head"/>
 <div class="container-fluid">
@@ -19,7 +53,7 @@
 <h3>ThankYou</h3> 
 <h5>Have a nice Day</h5>
 
-<a href="${pageContext.request.contextPath}/allProduct"
+<a href="${pageContext.request.contextPath}/allProducts"
 			class="btn btn-warning  btn pull-center">Continue Shopping</a>
 </center>
 </div>
