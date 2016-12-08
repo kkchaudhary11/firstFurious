@@ -1,15 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 <c:import url="/head-meta" />
 </head>
-<body>
+<script type="text/javascript">
+		var myApp = angular.module('myApp', []);
+		myApp.controller("myCntrl", function($scope) {
+		$scope.data = ${catList};	
+		})
+</script>
+<style>
+.btn{
+color:#f26522;
+}
+</style>
+
+
+
+<body ng-app="myApp" ng-controller="myCntrl">
 
 	<c:import url="/head" />
-
+	
+	
+<div class="container-fluid">
 	<div class="container">
 		<br>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -75,8 +92,8 @@
 	<div class="container-fluid">
 
 
-		<div class="row">
-			<center>
+		<div class="row" style="text-align:center;">
+			
 				<div class="col-sm-4">
 
 					<div class="row">
@@ -124,11 +141,59 @@
 						</div>
 					</div>
 				</div>
-			</center>
+		
 		</div>
 
 	</div>
+	
+	
+	
+	
+	<div id="container" align="center"  >
+	
+			<video  width="100%" height="300" autoplay controls loop >
+		  <source src="resources/videos/clip.mp4" type="video/mp4">
+		
+		Your browser does not support the video tag.
+		</video>
+		 
+    <div id="custom-message">EXPERIANCE BEAUTY</div>
+    
+    <script>
+	var $vid = $('video','#container');
+	var $msg = $('#custom-message'); 
+	$msg.css({
+	    top:$vid.offset().top + (($vid.height()/2) - ($msg.height()/2)),
+	    left:$vid.offset().left + (($vid.width()/2) - ($msg.width()/2))
+	});
+	  
+	</script>
+	</div>
+
+ 	
+	
+	
+	
+	<div id="container" style="text-align:center;">
+	
+	
+	
+	
+	
+	<div ng-repeat="x in data ">
+		<div class="col-sm-2" style="margin-top: 25px">
+		
+		<span class="category"><a href="${pageContext.request.contextPath}/products/{{x.cName}}" class="btn btn-default btn-xl">{{x.cName}}</a></span>
+		</div>
+		</div>
+	
+	</div>
+
+</div>
 
 	<c:import url="/foot" />
+	
+	
+	
 </body>
 </html>

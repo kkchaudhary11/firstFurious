@@ -7,9 +7,10 @@
 </head>
 
 <script type="text/javascript">
+	var products = ${Products};
 	var myApp = angular.module('myApp', []);
 	myApp.controller("myCntrl", function($scope) {
-	$scope.data = ${Products};	
+	$scope.data = products;	
 	})
 </script>
 
@@ -30,7 +31,7 @@
 		%>
 					
 
-	<div class="container-fluid">
+	<div class="container-fluid" >
 		<div class="col-md-4 col-md-offset-4">
 			<a href="addProduct" class="btn btn-warning btn-block">Add Product</a>
 		</div>
@@ -40,6 +41,7 @@
 		<%
 				}
 		%>
+		
 		
 		<div class="container-fluid">
 		<div class="col-md-4 col-md-offset-4">
@@ -51,38 +53,40 @@
 		</div>
 	</div>
 	
+	
 	<br><br>
 	
 	<div class="container-fluid">
 	<div class="col-md-12">
 	
+	
 	<table class="table table-hover">
 			<tbody>
 			<tr>			
-				<th>Product Name</th>
-				<th>Product Category</th>
-				<th>Product Description</th>
-				<th>Product Quantity</th>
-				<th>Product Price</th>
-				<th>Product Image</th>
+				<th align="center">Product Name</th>
+				<th align="center">Product Category</th>
+				<th align="center">Product Description</th>
+				<th align="center">Product Quantity</th>
+				<th align="center">Product Price</th>
+				<th align="center">Product Image</th>
 			
 			</tr>
 				<tr ng-repeat="x in data | filter:searchText">
-					<td>{{x.ProductName}}</td>
-					<td>{{x.ProductCategory}}</td>
-					<td>{{x.ProductDescription}}</td>
-					<td>{{x.ProductQuantity}}</td>
-					<td>{{x.ProductPrice}}</td>
-					<td><img
-						ng-src="${pageContext.request.contextPath}/{{ x.flag }}" height=" 50px" width="100px"></td>
+					<td >{{x.pName}}</td>
+					<td >{{x.pCategory}}</td>
+					<td>{{x.pDescription}}</td>
+					<td align="center">{{x.pQuantity}}</td>
+					<td align="center">{{x.pPrice|currency:"&#8377":2}}</td>
+					<td align="center"><img
+						ng-src="${pageContext.request.contextPath}/{{ x.pImage }}" height=" 50px" width="100px"></td>
 
 					<%
 						if(request.isUserInRole("ADMIN"))
 						{
 					%>
 					
-					<td><a href="${pageContext.request.contextPath}/updateproduct/{{x.ProductId}}" class="btn btn-primary btn-xs">UPDATE</a></td>
-					<td><a href="${pageContext.request.contextPath}/DeleteProductFromDB/{{x.ProductId}}" class="btn btn-danger btn-xs">DELETE</a></td>						
+					<td><a href="${pageContext.request.contextPath}/updateproduct/{{x.pId}}" class="btn btn-primary btn-xs">UPDATE</a></td>
+					<td><a href="${pageContext.request.contextPath}/DeleteProductFromDB/{{x.pId}}" class="btn btn-danger btn-xs">DELETE</a></td>						
 					<%
 					}
 					%>
@@ -91,7 +95,7 @@
 						if(request.isUserInRole("USER")){
 					%>
 					
-					<td><a href="${pageContext.request.contextPath}/view/{{x.ProductId}}" class="btn btn-primary btn-xs">VIEW</a></td>						
+					<td><a href="${pageContext.request.contextPath}/view/{{x.pId}}" class="btn btn-warning">VIEW</a></td>						
 					
 						<%
 					}
@@ -99,6 +103,7 @@
 					</tr>
 			</tbody>
 		</table>
+		
 		</div>
 	</div>
 	<c:import url="/foot" />

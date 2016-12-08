@@ -21,73 +21,57 @@
 <body>
 	<c:import url="/head" />
 
-	<br>
-	<br>
-	<br>
-	<br>
+	<div class="container-fluid">
+	<div class="col-md-4 col-md-offset-4">
+	<h3><b>PRODUCT DETAIL</b></h3>
+	</div>
+		
+	</div>
+	<hr>
 
 	<div class="container">
-		<table class="table">
-			<tr>
-
-				<td colspan="2"><img
-					src="${pageContext.request.contextPath}/${ProductImg}" width="40%"
-					class="img img-responsive img-thumbnail"></img></td>
-			</tr>
-
-			<tr>
-				<td>Product Name :</td>
-				<td>${ProductName}</td>
-			</tr>
-	
-			<tr>
-				<td>Description:</td>
-				<td>${ProductDescription}</td>
-			</tr>
-			<tr>
-				<td>Category :</td>
-				<td>${ProductCategory}</td>
-			</tr>
-
-			<tr>
-				<td>Price :</td>
-				<td>${ProductPrice}</td>
-			</tr>
-
-
-
-
- 
-
-
+		<div class="col-md-6">
+			<img
+					src="${pageContext.request.contextPath}/${ProductImg}" width="100%"
+					class="img img-responsive img-thumbnail"></img>
+		</div>
+		
+		<div class="col-md-6">
+			<div><span style="font-size:25px"><strong>${ProductName}</strong></span></div>
+			<hr>
+			<div><span class="text-uppercase"><kbd>&nbsp${ProductCategory}&nbsp</kbd></span></div><br>
 			
-<%
-     if (!request.isUserInRole("ADMIN")) {
-    	 
-        
-        %>
+			<div>${ProductDescription} </div><br>
+			<div><span style="font-size:20px" class="text-warning"><strong>&#8377  ${ProductPrice}</strong></span></div>
+			<br>
+			
+			<% if (!request.isUserInRole("ADMIN")) {    %>
         
         	<form action="${pageContext.request.contextPath}/addToCart" method="post">
 
 				<input type="hidden" value="${ProductId}" name="pid" />
-				<tr>
-					<td>Qty</td>
-					<td><input type="number" value="1" min="1" max="10"
-						name="pqty" class="form form-input" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Add To Cart"
-						class="btn btn-success" /></td>
-				</tr>
+				<div>
+				<b>Quantity :</b>
+				
+				<input type="number" value="1" min="1" max="10"
+						name="pqty"   />
+				</div>
+		</div>
+		
+		
+		
+		<div class="col-md-12" align="center" style="margin-top:30px;">
+				<input type="submit" value="Add To Cart"
+						class="btn btn-warning btn-lg" />
+				</div>
+				
+				
 			</form>
-<%
+		
+		<%
 }
 %>
-
-		</table>
 </div>
-<br><br>
-<br><br>
+
 </body>
 </html>

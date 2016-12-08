@@ -19,7 +19,7 @@
 	<hr>
 
 	<div class="col-md-4 col-md-offset-4">
-		<form id="loginform" class="form-horizontal" role="form">
+		<form id="loginform" class="form-horizontal" role="form" action="sendQuery" method="post">
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input id="contact-name" type="text"
@@ -33,11 +33,18 @@
 					type="email" class="form-control" name="email"
 					placeholder="Enter your email">
 			</div>
+			
+			<div style="margin-bottom: 25px" class="input-group">
+				<span class="input-group-addon"><i
+					class="glyphicon glyphicon-envelope"></i></span> <input 
+					type="text" class="form-control" name="subject"
+					placeholder="Enter Query Subject">
+			</div>
 
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
-					class="glyphicon glyphicon-pencil"></i></span>
-				<textarea class="form-control" rows="3" id="contact-message"
+					class="glyphicons glyphicons-note-empty"></i></span>
+				<textarea class="form-control" rows="3" id="contact-message" name="message"
 					placeholder="Enter your Message"></textarea>
 			</div>
 

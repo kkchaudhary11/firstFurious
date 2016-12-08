@@ -47,8 +47,10 @@
              				</div>
                   
 			<div style="margin-bottom: 25px" class="col-lg-12">
-				<form:input path="pDescription" type="text" class="form-control" placeholder="Enter Product Description" />
-			</div>
+				<form:textarea path="pDescription" class="form-control" rows="3" 
+					placeholder="Enter Product Description"></form:textarea>
+			
+				</div>
 			<div style="margin-bottom: 25px" class="col-lg-12">
 				<form:input path="pPrice" type="text" class="form-control" placeholder="Enter Product Price" />
 			</div>

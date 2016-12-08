@@ -59,6 +59,15 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 	
+	
+	@Transactional
+	public List<Product> getProductByName(String pCat){
+		List<Product> list = this.getSessionFactory().getCurrentSession().createQuery("from Product where pCategory = :pcat").setString("pcat", pCat).list();
+		return list;
+		
+	}
+	
+	
 	@Transactional
 	public Product getProductWithMaxId() 
 	{

@@ -77,35 +77,52 @@
 	
 </script>
 
+<script type="text/javascript">
+
+function sync()
+{
+  var n1 = document.getElementById('n1');
+  var n2 = document.getElementById('n2');
+  n2.value = n1.value;
+}
+
+</script>
+
 <body ng-app="myApp" ng-controller="abc">
 <c:import url="/head"/>
-<div class="container-fluid">
+<div class="container">
 <a href="${flowExecutionUrl}&_eventId=BackToCart"
 		class="btn btn-danger btn pull-left">Back To Cart</a>
 
 	<a href="${flowExecutionUrl}&_eventId=ViewCompleteOrder"
 		class="btn btn-warning btn pull-right">Confirm Details</a>
 </div>
-		
+	<hr>	
 		
 <div class="container">		
-<div class="pge2" align="center">
+<div class="col-md-4 col-md-offset-4">
 	
 	<div>
-	<label>Shipping address</label><br><br>
-	<textarea rows="5" placeholder="SHIPPING ADDRESS" class="form-control" style="resize: none;" ng-model="shippingAddress"></textarea>
+	<label>SHIPPING ADDRESS</label><br>
+	<textarea rows="4" placeholder="Enter Your Shipping Address" name="n1" id="n1" class="form-control" style="resize: none;" ng-model="shippingAddress"></textarea>
 	</div>
+	<br>
+	
 	
 	<div>
-	<label>Billing address</label><br><br>
-	<textarea rows="5" placeholder="BILLING ADDRESS" class="form-control" style="resize: none;" ng-model="billingAddress"></textarea>
+	<label>BILLING ADDRESS</label><br>
+	<div>
+	<input type="checkbox" name="check" onchange='sync()' />&nbsp Same As Above
+	</div>
+	<textarea rows="4" placeholder="Enter your billing Address" name="n2" id="n2" class="form-control" style="resize: none;" ng-model="billingAddress"></textarea>
 	</div>
 	<br><br>
-	<div><input type="button" value="Update" class="btn btn-success" ng-click="UpdateAddresses()" ng-disabled="shippingAddress=='' || billingAddress==''">
+	<div align="center"><input type="button" value="Update" style="position: absolute;" class="btn btn-warning btn-block" ng-click="UpdateAddresses()" ng-disabled="shippingAddress=='' || billingAddress==''">
 	</div><br>
 	<br>
-	 <label class="alert alert-success" style="position: absolute; top: 490px; left: 530px; " ng-show="updated=='updated'">Updated</label>
-
+	<div align="center">
+	 <label class="alert alert-success" style="position: relative; top: 20px; " ng-show="updated=='updated'">Updated</label>
+</div>
 </div>
 </div>
 		

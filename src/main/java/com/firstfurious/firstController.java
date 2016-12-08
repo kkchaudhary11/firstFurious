@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -36,6 +38,7 @@ import com.firstfurious.product.ProductDAO;
 import com.firstfurious.user.User;
 import com.firstfurious.user.UserDAO;
 import com.firstfurious.userRole.UserRoleDAO;
+import com.google.gson.Gson;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -53,6 +56,7 @@ public class firstController{
 	UserRoleDAO urdao;
 	@Autowired
 	CartDAO crdao;
+	
 	
 	@Autowired
 	ServletContext context;
@@ -83,6 +87,9 @@ public class firstController{
 		//request handler method
 
 		ModelAndView model = new ModelAndView("index");
+		List<Category> list = cdao.getCategory();
+		String catList = new Gson().toJson(list);
+		model.addObject("catList",catList);
 		return model;
 	}
 	
@@ -212,21 +219,25 @@ public class firstController{
 		JSONArray jarr = new JSONArray();
 		List<Product> list = pdao.getProduct();
 		System.out.println(list);
-		for(Product p:list){
-			JSONObject jobj = new JSONObject();
-			
-			jobj.put("ProductId", p.getpId());
-			jobj.put("ProductName", p.getpName());
-			jobj.put("ProductCategory", p.getpCategory());
-			jobj.put("ProductDescription", p.getpDescription());
-			jobj.put("ProductQuantity", p.getpQuantity());
-			jobj.put("ProductPrice", p.getpPrice());
-			jobj.put("flag", p.getpImage());
-			jarr.add(jobj);
-		}
-		mav.addObject("Products", jarr.toJSONString());
-		System.out.println(jarr.toJSONString());
+		String pList = new Gson().toJson(list);
+		System.out.println();
+		mav.addObject("Products",pList);
 		return mav;
+	}
+	
+	@RequestMapping("/products/{cName}")
+	public ModelAndView products(@PathVariable("cName") String cName){
+		
+		ModelAndView mav = new ModelAndView("allProducts");
+		
+		List<Product> list = pdao.getProductByName(cName);
+		
+		String catList = new Gson().toJson(list);
+		mav.addObject("Products",catList);
+		
+		return mav;
+		
+		
 	}
 	
 	@RequestMapping("/addProduct")
@@ -514,4 +525,54 @@ public class firstController{
 		return "redirect:initiateFlow";
 
 		}
+	
+	
+	/*@RequestMapping(value="/sendQuery" , method = RequestMethod.POST)
+	public String sendQuery( HttpServletRequest req , HttpServletResponse resp ) {
+
+		String uname = req.getParameter("name");
+		String uemail = req.getParameter("email");
+		String subject = req.getParameter("subject");
+		String msg = req.getParameter("message");
+		
+		System.out.println( uemail );
+		System.out.println( subject );
+		System.out.println( msg );
+
+		SimpleMailMessage email = new SimpleMailMessage();
+		
+		email.setTo("kkchaudhary11@gmail.com");
+		email.setSubject(uemail+":"+subject);
+		email.setText(uname+":"+msg);
+
+		try
+		{
+			mail.send(email);
+			
+			System.out.println("Mail 1 Sent");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+
+		String uemail1 = req.getParameter("email");
+
+
+		System.out.println( uemail1 );
+		
+		
+		email.setTo(uemail1);
+		email.setSubject("Welcome to Krystal Watches");
+		email.setText(" Thanks for Contacting Us \n We will get back to you soon \n\n Regards, \n The Krystal Watches Team");
+		
+		
+	
+		
+		
+		return "contactus";
+	}*/
+	
+	
 }

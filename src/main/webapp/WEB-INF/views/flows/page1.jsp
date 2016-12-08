@@ -85,50 +85,53 @@
 
 <body ng-app="myApp" ng-controller="abc">
 <c:import url="/head"/>
-	<div class="container-fluid">
+
+
+	<div class="container">
 		<a href="${pageContext.request.contextPath}/allProducts"
-			class="btn btn-danger btn pull-left"><span
-			class="glyphicon glyphicon-chevron-left"></span>BACK TO PRODUCT</a>
+			class="btn btn-danger btn pull-left">BACK TO PRODUCTS</a>
 
 
 		<a href="${flowExecutionUrl}&_eventId=goToCheckout"
-			class="btn btn-warning  btn pull-right">CHECK OUT<span
-	
-			class="glyphicon glyphicon-chevron-right"></span></a>
+			class="btn btn-warning  btn pull-right">CHECK OUT</a>
 			
 			</div>
 <hr/>
 
 	<div class="container-fluid">
-	<div class="col-md-12">
 	
-	<table class="table table-hover">
-			<tbody>
-			<tr>			
-				<th>Product Name</th>
-				<th>Product Qty</th>
-				<th>Product Price</th>
-				<th>Product Image</th>
-			</tr>
-				<tr ng-repeat="x in data ">
-					<td>
-				
-					{{x.ProductName}}
-					</td>
-					<td>{{x.ProductQty}}</td>
-					<td>{{x.ProductPrice}}</td>
-					<td><img
-					ng-src="${pageContext.request.contextPath}/{{ x.ProductImage }}" height=" 50px" width="100px"></td>
-                    
-                    
-					<td><a href="${pageContext.request.contextPath}/view/{{x.ProductId}}" class="btn btn-warning btn-xs">VIEW</a></td>
+	<div class="col-md-4 col-md-offset-4">
+	<div  ng-repeat="x in data ">
+			<div class="panel panel-default">
+			
+				 <div class="panel-body">
+				 
+					 <div class="col-md-6">
+				  	 <img
+					ng-src="${pageContext.request.contextPath}/{{ x.ProductImage }}" height=" 80px" width="170px" class="img img-responsive img-thumbnail">
+				    </div>
+				    
+				    <div class="col-md-6">
+					<div><span style="font-size:20px"><strong>{{x.ProductName}}</strong></span></div>
 					
-					<td><input type="button" value="Delete from Cart"
-					class="btn btn-danger btn-xs" ng-click="deleteFromCart(x.CartId)" /></td>
-					</tr>
-			</tbody>
-		</table>
-		</div>
+					<div><b>Quantity :{{x.ProductQty}} </b></div>
+					
+					<div><span style="font-size:15px" class="text-warning"><strong>&#8377  {{x.ProductPrice}}</strong></span></div>
+				    </div>
+			    
+			    
+				    <div class="col-md-12" style="margin-top:10px;" align="center">
+				    <a href="${pageContext.request.contextPath}/view/{{x.ProductId}}" class="btn btn-warning btn-xs">VIEW</a>
+					&nbsp &nbsp
+					<input type="button" value="Delete from Cart"
+					class="btn btn-danger btn-xs" ng-click="deleteFromCart(x.CartId)" />
+				    </div>
+			    		    
+			    </div>  
+		    
+		  	</div>
+	 </div>
+  </div>
 		</div>
 	
 </body>

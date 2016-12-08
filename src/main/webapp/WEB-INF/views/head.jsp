@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -57,6 +57,31 @@ body {
 	color: #f26522;
 	font-size: 1.5em;
 }
+
+video {
+    position:relative;
+    z-index:-1;
+    
+}
+
+#custom-message {
+    position:absolute;
+    color: #E7E7E7;
+	font-size: 30px;
+    z-index:1;      
+}
+
+.category {
+	
+    text-transform: uppercase;
+}
+.btn-xl {
+    padding: 30px 50px;
+    font-size: 15px;
+    border-radius: 70px;
+}
+​
+
 </style>
 
 <!-- navigation bar  -->

@@ -86,102 +86,79 @@
 
 <body ng-app="myApp" ng-controller="abc">
 	<c:import url="/head" />
+	<div class="container">
+		<a href="${flowExecutionUrl}&_eventId=BackToConfirmDetails"
+			class="btn btn-danger btn pull-left">Back To Update Address</a>
+		<a href="${flowExecutionUrl}&_eventId=ConfirmOrder"
+			class="btn btn-warning btn pull-right">Confirm Order</a>
+	</div>
 
-	<br>
-	<br>
-	<br>
-	<br>
-
-
-	<a href="${flowExecutionUrl}&_eventId=BackToConfirmDetails"
-		class="btn btn-danger btn pull-left"><span
-		class="glyphicon glyphicon-chevron-left"></span>Back To Update Address</a>
-	<a href="${flowExecutionUrl}&_eventId=ConfirmOrder"
-		class="btn btn-success btn pull-right">Confirm Order<span
-		class="glyphicon glyphicon-chevron-right"></span></a>
-
+<hr/>
 
 	<div class="container">
 	
-		<div class="pge2" align="center">
+	
+	<div class="col-md-6">
 
-			<div>
-				<label>Shipping address</label><br> <br>
-				<textarea rows="5" placeholder="SHIPPING ADDRESS"
-					class="form-control" style="resize: none;"
-					ng-model="shippingAddress"></textarea>
+		<div ng-repeat="x in data" >
+		<div class="panel panel-default">
+		<div class="panel-heading">ITEM {{$index+1}}</div>
+			<div class="panel-body">
+				<div class="col-md-6">
+				 	<img ng-src="${pageContext.request.contextPath}/{{ x.ProductImage }}" height=" 80px" width="170px" class="img img-responsive img-thumbnail">
+				</div>
+				<div class="col-mad-6">
+					<div><span style="font-size:20px"><strong>{{x.ProductName}}</strong></span></div>
+					
+					<div><b>Quantity :{{x.ProductQty}} </b></div>
+					
+					<div><span style="font-size:15px" class="text-warning"><strong>&#8377  {{x.ProductPrice}}</strong></span></div>
+				   
+				</div>
 			</div>
-
-			<div>
-				<label>Billing address</label><br> <br>
-				<textarea rows="5" placeholder="BILLING ADDRESS"
-					class="form-control" style="resize: none;"
-					ng-model="billingAddress"></textarea>
-			</div>
-
-
-
-			<label><h2 style="font-family: Monotype Corsiva">
-					<b>Total Price</b>
-				</h2></label><br>
-			<textarea rows="2" class="form-control"
-				style="resize: none; font-family: Monotype Corsiva; color: darkblack; font-size: 20px"
-				ng-model="TotalPrice" ng-disabled="true"></textarea>
-
-			<br> <br>
-
+		</div>
 		</div>
 	</div>
-	<br><br>
-
-	<div ng-repeat="x in data" style="background-color: rgba(255, 255, 255, 0.9);">
-
+	
+	<div class="col-md-6">
+		<div class="panel-group">
+	
 		
-		<div class="container">
-	<div class="table">
-		<div class="row">
-		
-<div class="col-md-6">
-					<div style="margin: auto; width: 45%;">
-						<img src="${pageContext.request.contextPath}/{{x.ProductImage}}"
-							width="100%" class="img img-responsive img-thumbnail"></img>
-					</div>
+			
+		<div class="panel panel-warning">
+	      <div class="panel-heading">SHIPPING ADDRESS</div>
+	      <textarea rows="4" placeholder="SHIPPING ADDRESS"
+						class="form-control" style="resize: none;"
+						ng-model="shippingAddress" disabled></textarea>
+				
+		</div>
+		<br>
+		<div class="panel panel-warning">
+		  <div class="panel-heading">BILLING ADDRESS</div>
+			
+				<textarea rows="4" placeholder="BILLING ADDRESS"
+					class="form-control" style="resize: none;"
+					ng-model="billingAddress" ng-disabled="true"></textarea>
+			
+					
 			</div>
 			
-			<div class="col-md-6">
-				
-		<table class="table" align="center">
-		<br>
-		
-				<tr>
-				<th></th>
-				<th></th>
-				</tr>
-		
-				<tr>
-				<td>Product Name</td>
-				<td>{{x.ProductName}}</td>
-				</tr>
-	<tr>
-				<td>Qty</td>
-				<td>{{x.ProductQty}}</td>
-			</tr>
-
-			<tr>
-
-				<td>Price</td>
-				<td>{{x.ProductPrice}}</td>
-			</tr>
+	<br>
+			<div class="panel panel-danger">
+		  		<div class="panel-heading">TOTAL PRICE</div><strong> 
+			<textarea rows="1" class="form-control"  style="resize: none;" ng-model="TotalPrice" ng-disabled="true">&#8377</textarea></strong>
+				</div>
+			</div>
 			
-			
-		</table>
-		</div>
-		</div>
-		</div>
-</div>
-		<br>
-		<br>
-		<br>
+		
+					
+	
+	
+	</div>
+	
+	
+	</div>
+	
 </body>
 
 </html>
