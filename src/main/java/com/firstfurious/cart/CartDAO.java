@@ -8,6 +8,8 @@ public interface CartDAO {
 	
 	Cart getCartByUsername(String Username);
 	
+	Cart getCartBypId(int cartpId);
+	
 	String checkUsername(String Username);
 
     void update(Cart cart);

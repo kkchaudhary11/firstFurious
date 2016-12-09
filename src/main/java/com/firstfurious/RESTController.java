@@ -24,6 +24,8 @@ import com.firstfurious.cart.Cart;
 import com.firstfurious.cart.CartDAO;
 import com.firstfurious.product.Product;
 import com.firstfurious.product.ProductDAO;
+import com.firstfurious.user.User;
+import com.firstfurious.user.UserDAO;
 
 
 @CrossOrigin(origins = "http://localhost:8090", maxAge = 3600)
@@ -36,6 +38,10 @@ public class RESTController {
 	
 	@Autowired
 	ProductDAO pdao;
+	
+	@Autowired
+	UserDAO udao;
+	
 
 	@RequestMapping(value = "/REST/fetchAllItems", method = RequestMethod.POST)
 	public ResponseEntity<String> fetchAllItems()
@@ -78,6 +84,36 @@ public class RESTController {
 		return new ResponseEntity<String>(jarr.toJSONString(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/REST/getaddress", method = RequestMethod.POST)
+	public ResponseEntity<String> getAddress()
+	{	
+		String username = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null && !auth.getName().equals("anonymousUser")) {
+			System.out.println(auth.getName());
+			// System.out.println("User present");
+			username = auth.getName();	
+		} 
+		
+		JSONArray jarr = new JSONArray();
+		
+		if( username != null )
+		{
+			User u = udao.getUser(username);
+			String user = u.getuAddress();
+			
+			JSONObject jobj = new JSONObject();
+			
+			jobj.put("address", user);
+			System.out.println(user);
+			jarr.add(jobj);
+		}
+		
+		System.out.println(jarr.toJSONString());
+		
+		return new ResponseEntity<String>(jarr.toJSONString(), HttpStatus.OK);
+	}
+	
 	
 	
 	@CrossOrigin
@@ -87,7 +123,20 @@ public class RESTController {
 
 		int cartId = Integer.parseInt(inputdata);
 
+		
+		Cart cartdel = cs.getCartById(cartId);
+		String quantity = cartdel.getQty();
+		String pid = cartdel.getProductID();
+		
+		Product productQunantity = pdao.getProduct(Integer.parseInt(pid));
+		String quan = productQunantity.getpQuantity();
+		productQunantity.setpQuantity(String.valueOf(Integer.parseInt(quan)+Integer.parseInt(quantity)));
+		pdao.update(productQunantity);
+		
 		cs.delete(cartId);
+		
+		
+
 
 		List<Cart> list = cs.getAllProduct();
 

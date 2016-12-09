@@ -10,8 +10,9 @@
 	var products = ${Products};
 	var myApp = angular.module('myApp', []);
 	myApp.controller("myCntrl", function($scope) {
-	$scope.data = products;	
+	$scope.data = products;
 	})
+		
 </script>
 
 <body ng-app="myApp" ng-controller="myCntrl">
@@ -56,10 +57,71 @@
 	
 	<br><br>
 	
-	<div class="container-fluid">
-	<div class="col-md-12">
+	
+	<div class="container">
+
+		<div class="col-md-4" ng-repeat="x in data">
+			<div class="panel panel-default">
+			
+	<div class="panel-body">
+			<div class="col-md-12">
+				<img class="img-rounded" ng-src="${pageContext.request.contextPath}/{{ x.pImage }}" height=" 150px" width="300px">
+
+				</div>
+					<div class="col-md-12" >
+					<h4><strong>{{x.pName}}</strong></h4>
+					</div>
+					<div class="col-md-12" style="margin-bottom:10px">
+					<span class="badge">{{x.pCategory}}</span>
+					</div>
+					
+				
+				
+				<div class="col-md-6" style="text-align: left;"  >
+				<span  class="text-warning" ><strong>{{x.pPrice|currency:"&#8377":2}}</strong></span>
+				
+				
+				</div>
+				<div class="col-md-6" style="text-align: right;" >
+				<span ><strong>Quantity:&nbsp{{x.pQuantity}}</strong></span>
+				</div>
+				
+				<%
+						if(request.isUserInRole("USER")){
+					%>
+				<div class="col-md-12" align="center" style="margin-top:10px;">
+					<a href="${pageContext.request.contextPath}/view/{{x.pId}}" class="btn btn-warning btn-block btn-xs">VIEW</a>
+					</div>
+					<%} %>
+					
+					<%
+						if(request.isUserInRole("ADMIN"))
+						{
+					%>
+				<div class="col-md-12" align="center" style="margin-top:10px;">
+				
+				<div class="col-md-6" style="text-align: left;" >
+				<a href="${pageContext.request.contextPath}/updateproduct/{{x.pId}}" class="btn btn-primary btn-xs btn-block">UPDATE</a>
+				
+				
+				</div>
+				<div class="col-md-6" style="text-align: right;" >
+				<a href="${pageContext.request.contextPath}/DeleteProductFromDB/{{x.pId}}" class="btn btn-danger btn-xs btn-block">DELETE</a>
+				</div>
+				</div>
+				
+					
+					<%} %>
+				</div>
+				</div>	
+		</div>
+		
+	</div>
 	
 	
+	
+	<div class="container-fluid">	
+	<div class="col-md-12">	
 	<table class="table table-hover">
 			<tbody>
 			<tr>			

@@ -43,7 +43,7 @@
 
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
-					class="glyphicons glyphicons-note-empty"></i></span>
+					class="glyphicons glyphicons-pencil"></i></span>
 				<textarea class="form-control" rows="3" id="contact-message" name="message"
 					placeholder="Enter your Message"></textarea>
 			</div>
@@ -51,7 +51,7 @@
 			<div style="margin-top: 10px" class="form-group">
 				<!-- Button -->
 				<div class="col-sm-12 controls">
-					<a id="btn-submit" href="#" class="btn btn-warning btn-block">Send</a>
+					<input type="submit" class="btn btn-warning btn-block" value="SEND">
 				</div>
 			</div>
 		</form>

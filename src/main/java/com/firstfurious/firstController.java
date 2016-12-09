@@ -56,6 +56,8 @@ public class firstController{
 	UserRoleDAO urdao;
 	@Autowired
 	CartDAO crdao;
+	@Autowired
+	JavaMailSender mail;
 	
 	
 	@Autowired
@@ -496,15 +498,30 @@ public class firstController{
 			System.out.println(request.getParameter("pqty"));
 
 			int qty = 1;
+			
+			
+			Cart cd = crdao.getCartBypId(Integer.parseInt(request.getParameter("pid")));
+			
+			
+			qty = Integer.parseInt(request.getParameter("pqty"));
+			
 
 			try {
-				qty = Integer.parseInt(request.getParameter("pqty"));
+				
 
 				if (!(qty >= 1 && qty <= 10))
 					throw new Exception();
 			} catch (Exception e) {
 				System.out.println("Invalid Qty");
 			}
+			
+			
+			if(cd!=null){
+				String checkQuantity = cd.getQty();
+				cd.setQty(String.valueOf(Integer.parseInt(checkQuantity)+qty));
+				crdao.update(cd);
+			}
+			else{
 
 			Cart c = new Cart();
 
@@ -519,6 +536,12 @@ public class firstController{
 			c.setUserName(auth.getName());
 
 			crdao.add(c);
+			}
+			
+			Product productQunantity = pdao.getProduct(Integer.parseInt(request.getParameter("pid")));
+			String quan = productQunantity.getpQuantity();
+			productQunantity.setpQuantity(String.valueOf(Integer.parseInt(quan)-qty));
+			pdao.update(productQunantity);
 
 		}
 
@@ -527,7 +550,7 @@ public class firstController{
 		}
 	
 	
-	/*@RequestMapping(value="/sendQuery" , method = RequestMethod.POST)
+	@RequestMapping(value="/sendQuery" , method = RequestMethod.POST)
 	public String sendQuery( HttpServletRequest req , HttpServletResponse resp ) {
 
 		String uname = req.getParameter("name");
@@ -541,6 +564,7 @@ public class firstController{
 
 		SimpleMailMessage email = new SimpleMailMessage();
 		
+		email.setFrom("firstfurious95@gmail.com");
 		email.setTo("kkchaudhary11@gmail.com");
 		email.setSubject(uemail+":"+subject);
 		email.setText(uname+":"+msg);
@@ -564,15 +588,15 @@ public class firstController{
 		
 		
 		email.setTo(uemail1);
-		email.setSubject("Welcome to Krystal Watches");
+		email.setSubject("Welcome to FirstFurious");
 		email.setText(" Thanks for Contacting Us \n We will get back to you soon \n\n Regards, \n The Krystal Watches Team");
 		
 		
 	
 		
 		
-		return "contactus";
-	}*/
+		return "redirect:/contactus";
+	}
 	
 	
 }

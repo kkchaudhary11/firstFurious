@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.firstfurious.product.Product;
+
 
 
 @Repository
@@ -45,7 +47,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Transactional
-	public void getUser(User u) {
+	public User getUser(String uid) {
+		
+		List<User> list = sessionFactory.getCurrentSession().createQuery("from User where uName = :id")
+				.setString("id", uid).list();
+		
+		return list.get(0);
 		
 		
 	}

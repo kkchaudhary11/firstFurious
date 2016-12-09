@@ -26,7 +26,7 @@ public class CartDAOImpl implements CartDAO{
 		this.sessionFactory = sessionFactory;
 	}
 	
-	
+	@Transactional
 	public Cart getCartById(int cartId) {
 		List l = sessionFactory.getCurrentSession().createQuery("from Cart where ID = :id").setInteger("id", cartId).list();
 		
@@ -35,7 +35,18 @@ public class CartDAOImpl implements CartDAO{
 		else
 			return null;
 	}
+	
+	@Transactional
+	public Cart getCartBypId(int cartpId) {
+		List l = sessionFactory.getCurrentSession().createQuery("from Cart where ProductID = :id").setInteger("id", cartpId).list();
+		
+		if( l.size() > 0 )
+			return (Cart)l.get(0);
+		else
+			return null;
+	}
 
+	@Transactional
 	public Cart getCartByUsername(String Username) {
 		List l = sessionFactory.getCurrentSession().createQuery("from Cart where Username = :Username").setString("Username", Username).list();
 		
@@ -45,6 +56,7 @@ public class CartDAOImpl implements CartDAO{
 			return null;
 	}
 
+	@Transactional
 	public String checkUsername(String Username) {
 		List l = sessionFactory.getCurrentSession().createQuery("from Cart where Username = :Username").setString("Username", Username).list();
 		

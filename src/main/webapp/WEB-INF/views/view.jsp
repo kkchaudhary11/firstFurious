@@ -39,7 +39,7 @@
 		<div class="col-md-6">
 			<div><span style="font-size:25px"><strong>${ProductName}</strong></span></div>
 			<hr>
-			<div><span class="text-uppercase"><kbd>&nbsp${ProductCategory}&nbsp</kbd></span></div><br>
+			<div><span class="text-uppercase"><badge>&nbsp${ProductCategory}&nbsp</kbd></span></div><br>
 			
 			<div>${ProductDescription} </div><br>
 			<div><span style="font-size:20px" class="text-warning"><strong>&#8377  ${ProductPrice}</strong></span></div>

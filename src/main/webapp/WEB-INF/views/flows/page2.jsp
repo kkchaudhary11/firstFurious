@@ -32,7 +32,22 @@
                                         return $q.reject(errResponse);
                                     }
                             );
-            }
+            },
+            
+            getaddress : function()
+			{
+            	var target_url = 'http://localhost:8090/firstFurious/';
+				return $http.post( target_url + 'REST/getaddress' ).then(
+					function( response ){
+						return response.data;
+					},
+					function( errResponse ){
+						return $q.reject(errResponse);
+					}
+				);
+			}
+    	
+    	
     };
  
 }]);
@@ -71,20 +86,38 @@
      	            {
      	            	console.error('Error while Sending Data.');
      	            } 
-        	);
+        	);	
         }
+        
+        $UserService.getaddress().then(function(response)
+        		{
+        			console.log(response);
+        			$scope.data = response;
+        			for (var i = 0; i < $scope.data.length; i++) {
+						try {
+							$scope.shippingAddress = $scope.data[i].address;
+							$scope.billingAddress = $scope.data[i].address;
+						} catch (e) {
+							console.log(e);
+						}
+					}
+        		},function(errResponse)
+        		{
+        			console.log('Error fetching Items');
+        		});
+        
 	}]); 
 	
 </script>
 
 <script type="text/javascript">
 
-function sync()
+/* function sync()
 {
   var n1 = document.getElementById('n1');
   var n2 = document.getElementById('n2');
   n2.value = n1.value;
-}
+} */
 
 </script>
 
@@ -111,9 +144,9 @@ function sync()
 	
 	<div>
 	<label>BILLING ADDRESS</label><br>
-	<div>
+	<!-- <div>
 	<input type="checkbox" name="check" onchange='sync()' />&nbsp Same As Above
-	</div>
+	</div> -->
 	<textarea rows="4" placeholder="Enter your billing Address" name="n2" id="n2" class="form-control" style="resize: none;" ng-model="billingAddress"></textarea>
 	</div>
 	<br><br>
