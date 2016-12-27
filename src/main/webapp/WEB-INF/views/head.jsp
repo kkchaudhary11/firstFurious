@@ -4,83 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-.glyphicon.glyphicon-wrench, .glyphicon.glyphicon-fire, .glyphicon.glyphicon-ok
-	{
-	color: #f26522;
-	font-size: 100px;
-}
 
-.glyphicon.glyphicon-chevron-left, .glyphicon.glyphicon-chevron-right {
-	color: #f26522;
-}
 
-html {
-	position: relative;
-	min-height: 100%;
-}
-
-body {
-	/* Margin bottom by footer height */
-	margin-bottom: 80px;
-}
-
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	text-align: center;
-	color: #dddddd;
-	/* Set the fixed height of the footer here */
-	height: 50px;
-	background-color: #000000;
-}
-
-.navbar .navbar-nav>li>a:hover, .navbar .navbar-nav>li>a:focus {
-	color: #f26522;
-}
-
-.navbar .navbar-nav>.active>a, .navbar .navbar-nav>.active>a:hover,
-	.navbar .navbar-nav>.active>a:focus {
-	color: #f26522;
-	background-color: #000000;
-}
-
-.navbar .navbar-toggle {
-	border-color: #f26522;
-}
-
-.navbar .navbar-toggle:hover, .navbar .navbar-toggle:focus {
-	background-color: #f26522;
-}
-
-#fa_color {
-	color: #f26522;
-	font-size: 1.5em;
-}
-
-video {
-    position:relative;
-    z-index:-1;
-    
-}
-
-#custom-message {
-    position:absolute;
-    color: #E7E7E7;
-	font-size: 30px;
-    z-index:1;      
-}
-
-.category {
-	
-    text-transform: uppercase;
-}
-.btn-xl {
-    padding: 30px 50px;
-    font-size: 15px;
-    border-radius: 70px;
-}
-​
 
 </style>
 

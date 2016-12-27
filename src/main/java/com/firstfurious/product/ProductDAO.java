@@ -10,7 +10,10 @@ public interface ProductDAO {
 
 	public Product getProduct(int pId);
 	public List<Product> getProduct();
-	public List<Product> getProductByName(String pCat);
+	
+	public List<Product> getBrand();
+	public List<Product> getProductByCategoryName(String pCat);
+	public List<Product> getProductByBrandName(String pBrand);
 	public Product getProductWithMaxId();
 	
 }

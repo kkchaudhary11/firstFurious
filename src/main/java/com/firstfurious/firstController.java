@@ -17,6 +17,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,6 +74,7 @@ public class firstController{
 			System.out.println("User not present");
 			return "true";
 		}
+		
 
 	}
 
@@ -80,7 +82,7 @@ public class firstController{
 	public ModelAndView index(){
 		//request handler method
 		urdao.generateUserRoles();
-		ModelAndView model = new ModelAndView("index");
+		ModelAndView model = home();
 		return model;
 	}
 	
@@ -90,8 +92,29 @@ public class firstController{
 
 		ModelAndView model = new ModelAndView("index");
 		List<Category> list = cdao.getCategory();
+		
+		List<Product> brandList = pdao.getProduct();
+		
+		JSONArray jarr = new JSONArray();
+		
+		/*for(Product p:brandList){
+				JSONObject jobj = new JSONObject();
+				jobj.put("id",p.getpId());
+				
+				jarr.add(jobj);
+				}
+			System.out.println(jarr.toJSONString());
+		*/
+		
+			
 		String catList = new Gson().toJson(list);
+
+		String brand = new Gson().toJson(brandList);
 		model.addObject("catList",catList);
+		model.addObject("brand",brand);
+		
+		System.out.println(brandList);
+		System.out.println(brand);
 		return model;
 	}
 	
@@ -218,7 +241,7 @@ public class firstController{
 	public ModelAndView allProducts(){
 		ModelAndView mav = new ModelAndView("allProducts");
 		
-		JSONArray jarr = new JSONArray();
+		
 		List<Product> list = pdao.getProduct();
 		System.out.println(list);
 		String pList = new Gson().toJson(list);
@@ -228,19 +251,33 @@ public class firstController{
 	}
 	
 	@RequestMapping("/products/{cName}")
-	public ModelAndView products(@PathVariable("cName") String cName){
+	public ModelAndView productByCategory(@PathVariable("cName") String cName){
 		
 		ModelAndView mav = new ModelAndView("allProducts");
 		
-		List<Product> list = pdao.getProductByName(cName);
+		List<Product> list = pdao.getProductByCategoryName(cName);
 		
 		String catList = new Gson().toJson(list);
 		mav.addObject("Products",catList);
 		
-		return mav;
-		
-		
+		return mav;	
 	}
+	
+	@RequestMapping("/products/{pBrnd}")
+	public ModelAndView productsBtBrand(@PathVariable("pBrand") String pBrands){
+		
+		ModelAndView mav = new ModelAndView("allProducts");
+		
+		List<Product> list = pdao.getProductByBrandName(pBrands);
+		
+		String brandList = new Gson().toJson(list);
+		mav.addObject("Products",brandList);
+		
+		return mav;	
+	}
+	
+	
+	
 	
 	@RequestMapping("/addProduct")
 	public ModelAndView addProducts(){
@@ -254,7 +291,7 @@ public class firstController{
 	}
 	
 	@RequestMapping(value="/AddProductToDB" , method=RequestMethod.POST)
-	public String AddProductToDB( @ModelAttribute("Product") Product p ){
+	public String AddProductToDB( @ModelAttribute("Product") Product p,HttpServletRequest request ){
 		
 		/*System.out.println(p.getpName());*/
 		pdao.insert(p);
@@ -292,6 +329,18 @@ public class firstController{
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 				stream.write(bytes);
 				stream.close();
+				
+				//for logo upload
+				byte[] bytes2 = null;
+				bytes2= p.getBrandLogo().getBytes();
+				String path2 = request.getSession().getServletContext().getRealPath("/resources/images/" + p.getpId() + ".jpg");
+				System.out.println("Path ="+path);
+				System.out.println("File name = " + p.getBrandLogo().getOriginalFilename());
+				File f = new File(path2);
+				BufferedOutputStream bs = new BufferedOutputStream(new FileOutputStream(f));
+				bs.write(bytes2);
+				bs.close();
+				System.out.println("file uploaded");
 
 			}
 
@@ -406,6 +455,12 @@ public class firstController{
 				}
 
 				if (usermatch == false) {
+					String password = user.getuPassword();
+					BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+					String hashedPassword = passwordEncoder.encode(password);
+					System.out.println(hashedPassword);
+					user.setuPassword(hashedPassword);
+					
 					udao.insertUser(user);
 
 					mav.addObject("User", new User());

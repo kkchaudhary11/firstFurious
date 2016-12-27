@@ -2,6 +2,7 @@ package com.firstfurious.user;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,7 +56,7 @@ public class User implements Serializable {
 	}
 	
 	@NotEmpty(message="Password Field is Mandatory")
-	@Size(min= 6, max=15, message="Your password must be between 6 to 15 characters")
+	@Column(length = 60)
 	public String getuPassword() {
 		return uPassword;
 	}

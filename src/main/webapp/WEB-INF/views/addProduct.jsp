@@ -6,6 +6,22 @@
 <html>
 <head>
 <c:import url="/head-meta" />
+<script type="text/javascript">
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah')
+                .attr('src', e.target.result)
+                .width(30)
+                .height(30);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 </head>
 
 <body>
@@ -26,7 +42,26 @@
 				<form:input path="pName" type="text" class="form-control" placeholder="Enter Product Name" />
 			</div>
 			
-			  <div style="margin-bottom: 25px" class="col-lg-12">
+			<div style="margin-bottom: 25px" class="col-lg-12">
+				<form:input path="pBrand" type="text" class="form-control" placeholder="Enter Product Brand" />
+								
+			</div>
+			
+			<div style="margin-bottom: 25px" class="col-lg-12">
+				<div class="col-md-6" align="left">
+						<label class="btn btn-default btn-file">
+				   Select Brand Logo <form:input path="BrandLogo" type="file" style="display: none;" onchange="readURL(this);"  /> 
+				</label>
+					</div>
+					
+					<div class="col-md-6">
+	   					 <img id="blah" src="#" alt="LOGO" />
+					</div>
+			</div>
+			
+			
+			
+			  <div style="margin-bottom: 25px; margin-top: 25px" class="col-lg-12">
 			<form:select path="pCategory" class="form-control">
                     		
                     	<c:choose>

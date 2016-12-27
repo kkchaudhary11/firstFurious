@@ -12,16 +12,25 @@ public class Product {
 	@javax.persistence.Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int pId;
 	private String pName;
+	private String pBrand;
+	
 	private String pCategory;
 	private String pDescription;
 	private String pPrice;
 	private String pQuantity;
 	private String pImage;
+	
 	@Transient
 	private MultipartFile ProductFile;
-
-
+	@Transient	
+	private MultipartFile BrandLogo;
 	
+	public MultipartFile getBrandLogo() {
+		return BrandLogo;
+	}
+	public void setBrandLogo(MultipartFile brandLogo) {
+		BrandLogo = brandLogo;
+	}
 	//getters and setters 
 	public int getpId() {
 		return pId;
@@ -77,6 +86,13 @@ public class Product {
 
 	public void setProductFile(MultipartFile productFile) {
 		ProductFile = productFile;
+	}
+	
+	public String getpBrand() {
+		return pBrand;
+	}
+	public void setpBrand(String pBrand) {
+		this.pBrand = pBrand;
 	}
 	
 

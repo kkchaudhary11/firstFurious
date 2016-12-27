@@ -10,13 +10,15 @@
 <script type="text/javascript">
 		var myApp = angular.module('myApp', []);
 		myApp.controller("myCntrl", function($scope) {
-		$scope.data = ${catList};	
+		$scope.data = ${catList};
+		$scope.brand = ${brand};
 		})
 </script>
 <style>
 .btn{
 color:#f26522;
 }
+
 </style>
 
 
@@ -179,11 +181,37 @@ color:#f26522;
 	
 	
 	
-	
+		<div class="col-lg-12" style="margin-bottom:20px">
 	<div ng-repeat="x in data ">
-		<div class="col-sm-2" style="margin-top: 25px">
+	
+<div class="col-sm-2" style="margin-top: 25px">
 		
 		<span class="category"><a href="${pageContext.request.contextPath}/products/{{x.cName}}" class="btn btn-default btn-xl">{{x.cName}}</a></span>
+		</div>
+	
+	</div>
+		
+		</div>
+		
+		<hr>
+		
+		<h1><strong><span style="color:#9498a1">BRANDS</span></strong></h1>
+		
+			<div class="col-lg-12">
+		
+	
+		
+			<div ng-repeat="y in brand ">
+				
+		<div class="col-sm-2" style="margin-top: 25px">
+	<div class="panel panel-default">
+			
+				 <div class="panel-body">
+		<span><img src="${pageContext.request.contextPath}/resources/images/{{y.pId}}.jpg" height=70px width=70px  onerror="this.src='${pageContext.request.contextPath}/resources/images/logo.png'" ><br><br>
+		<a href="${pageContext.request.contextPath}/products/{{y.pBrand}}" class="btn btn-warning ">{{y.pBrand}}</a></span>
+		</div>
+		</div>
+		</div>
 		</div>
 		</div>
 	

@@ -21,7 +21,7 @@
 	
 			<c:if test="${param.error != null}">
 				<p class="alert alert-danger">
-					<span>Invalid Username and password.</span>
+					<span>Invalid Username or password.</span>
 				</p>
 			</c:if>
 			<c:if test="${param.logout != null}">

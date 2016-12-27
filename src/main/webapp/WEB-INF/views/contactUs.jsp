@@ -43,7 +43,7 @@
 
 			<div style="margin-bottom: 25px" class="input-group">
 				<span class="input-group-addon"><i
-					class="glyphicons glyphicons-pencil"></i></span>
+					class="glyphicon glyphicon-pencil"></i></span>
 				<textarea class="form-control" rows="3" id="contact-message" name="message"
 					placeholder="Enter your Message"></textarea>
 			</div>

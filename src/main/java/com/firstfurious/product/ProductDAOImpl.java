@@ -61,11 +61,30 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	
 	@Transactional
-	public List<Product> getProductByName(String pCat){
+	public List<Product> getBrand(){
+		List<Product> list = this.getSessionFactory().getCurrentSession().createQuery("select distinct pBrand,pId from Product").list();
+		return list;
+		
+	}
+	
+	
+	@Transactional
+	public List<Product> getProductByCategoryName(String pCat){
 		List<Product> list = this.getSessionFactory().getCurrentSession().createQuery("from Product where pCategory = :pcat").setString("pcat", pCat).list();
 		return list;
 		
 	}
+	
+	
+	@Transactional
+	public List<Product> getProductByBrandName(String pBrand){
+		List<Product> list = this.getSessionFactory().getCurrentSession().createQuery("from Product where pBrand = :pbrand").setString("pbrand", pBrand).list();
+		return list;
+		
+	}
+	
+	
+	
 	
 	
 	@Transactional

@@ -44,8 +44,8 @@
 		%>
 		
 		
-		<div class="container-fluid">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="container">
+		<div class="col-md-12">
 		<div class="input-group" style="margin-top: 20px">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-search"></i></span> <input
@@ -60,19 +60,27 @@
 	
 	<div class="container">
 
-		<div class="col-md-4" ng-repeat="x in data">
+		<div class="col-md-4" ng-repeat="x in data | filter:searchText">
 			<div class="panel panel-default">
 			
 	<div class="panel-body">
 			<div class="col-md-12">
-				<img class="img-rounded" ng-src="${pageContext.request.contextPath}/{{ x.pImage }}" height=" 150px" width="300px">
+				<img class="img-rounded" ng-src="${pageContext.request.contextPath}/{{ x.pImage }}" height=" 150px" width="280px">
 
 				</div>
 					<div class="col-md-12" >
 					<h4><strong>{{x.pName}}</strong></h4>
 					</div>
 					<div class="col-md-12" style="margin-bottom:10px">
-					<span class="badge">{{x.pCategory}}</span>
+					<div class="col-md-6"  >
+					<span class="badge" style="margin-top:5px">{{x.pCategory}}</span>
+					<span class="badge" style="margin-top:5px">{{x.pBrand}}</span>
+					</div>
+					<div class="col-md-6"  style="text-align: right;">
+					<img src="${pageContext.request.contextPath}/resources/images/{{x.pId}}.jpg" height=30px width=30px  onerror="this.src='${pageContext.request.contextPath}/resources/images/logo.png'" >
+		
+					</div>
+					
 					</div>
 					
 				
@@ -120,7 +128,7 @@
 	
 	
 	
-	<div class="container-fluid">	
+	<%-- <div class="container-fluid">	
 	<div class="col-md-12">	
 	<table class="table table-hover">
 			<tbody>
@@ -167,7 +175,7 @@
 		</table>
 		
 		</div>
-	</div>
+	</div> --%>
 	<c:import url="/foot" />
 </body>
 </html>
