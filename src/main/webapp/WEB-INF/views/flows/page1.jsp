@@ -94,8 +94,7 @@
 
 		<a href="${flowExecutionUrl}&_eventId=goToCheckout"
 			class="btn btn-warning  btn pull-right">CHECK OUT</a>
-			
-			</div>
+				</div>
 <hr/>
 
 	<div class="container-fluid">

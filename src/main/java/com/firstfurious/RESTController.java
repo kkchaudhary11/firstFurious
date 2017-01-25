@@ -246,7 +246,7 @@ public class RESTController {
 		
 		String user = "";
 		
-		System.out.println("In Update Addresses");
+		System.out.println("In delte");
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    	if (auth != null && !auth.getName().equals("anonymousUser"))

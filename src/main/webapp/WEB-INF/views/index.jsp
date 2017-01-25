@@ -184,9 +184,9 @@ color:#f26522;
 		<div class="col-lg-12" style="margin-bottom:20px">
 	<div ng-repeat="x in data ">
 	
-<div class="col-sm-2" style="margin-top: 25px">
+<div class="col-sm-4" style="margin-top: 25px">
 		
-		<span class="category"><a href="${pageContext.request.contextPath}/products/{{x.cName}}" class="btn btn-default btn-xl">{{x.cName}}</a></span>
+		<span class="category"><a href="${pageContext.request.contextPath}/productsbycategory/{{x.cName}}" class="btn btn-default btn-xl">{{x.cName}}</a></span>
 		</div>
 	
 	</div>
@@ -208,7 +208,7 @@ color:#f26522;
 			
 				 <div class="panel-body">
 		<span><img src="${pageContext.request.contextPath}/resources/images/{{y.pId}}.jpg" height=70px width=70px  onerror="this.src='${pageContext.request.contextPath}/resources/images/logo.png'" ><br><br>
-		<a href="${pageContext.request.contextPath}/products/{{y.pBrand}}" class="btn btn-warning ">{{y.pBrand}}</a></span>
+		<a href="${pageContext.request.contextPath}/productbybrand/{{y.pBrand}}" class="btn btn-warning ">{{y.pBrand}}</a></span>
 		</div>
 		</div>
 		</div>

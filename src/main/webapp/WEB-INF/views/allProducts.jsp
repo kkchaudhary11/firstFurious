@@ -11,6 +11,7 @@
 	var myApp = angular.module('myApp', []);
 	myApp.controller("myCntrl", function($scope) {
 	$scope.data = products;
+	$scope.sortProducts = "pName";
 	})
 		
 </script>
@@ -45,13 +46,24 @@
 		
 		
 		<div class="container">
-		<div class="col-md-12">
+	
+		<div class="col-md-6 col-md-offset-3">
 		<div class="input-group" style="margin-top: 20px">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-search"></i></span> <input
 					type="text" class="form-control"  ng-model="searchText" placeholder="Search Products" autofocus/>
 			</div>
-		</div>
+			</div>
+			
+		<!-- 	<div class="col-md-6">
+				<select class="form-control" style="margin-top: 20px" ng-model="sortProducts">
+						<option value="-pPrice">Low Price</option>
+					<option value="pPrice">high Price</option>
+					<option value="pName">Name</option>
+				</select>
+			</div> -->
+		
+		
 	</div>
 	
 	
@@ -60,12 +72,12 @@
 	
 	<div class="container">
 
-		<div class="col-md-4" ng-repeat="x in data | filter:searchText">
+		<div class="col-md-4" ng-repeat="x in data | filter:searchText ">
 			<div class="panel panel-default">
 			
 	<div class="panel-body">
 			<div class="col-md-12">
-				<img class="img-rounded" ng-src="${pageContext.request.contextPath}/{{ x.pImage }}" height=" 150px" width="280px">
+				<img class="img-rounded" ng-src="${pageContext.request.contextPath}/{{ x.pImage }}" height=" 150px" width="270px">
 
 				</div>
 					<div class="col-md-12" >
@@ -86,7 +98,7 @@
 				
 				
 				<div class="col-md-6" style="text-align: left;"  >
-				<span  class="text-warning" ><strong>{{x.pPrice|currency:"&#8377":2}}</strong></span>
+				<span  class="text-warning" ><strong>{{x.pPrice|currency:"&#8377"}}</strong></span>
 				
 				
 				</div>

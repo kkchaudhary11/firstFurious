@@ -39,7 +39,14 @@
 		<div class="col-md-6">
 			<div><span style="font-size:25px"><strong>${ProductName}</strong></span></div>
 			<hr>
-			<div><span class="text-uppercase"><badge>&nbsp${ProductCategory}&nbsp</kbd></span></div><br>
+			<div><span class="badge">&nbsp${ProductCategory}&nbsp</span><br><br>
+			<span class="text-uppercase"><kbd>&nbsp${ProductBrand}&nbsp</kbd></span>
+			
+			</div><br>
+			
+			<img src="${pageContext.request.contextPath}/resources/images/${ProductId}.jpg" height=30px width=30px  onerror="this.src='${pageContext.request.contextPath}/resources/images/logo.png'" >
+		<br>
+			<br>
 			
 			<div>${ProductDescription} </div><br>
 			<div><span style="font-size:20px" class="text-warning"><strong>&#8377  ${ProductPrice}</strong></span></div>

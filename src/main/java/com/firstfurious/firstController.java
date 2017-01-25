@@ -250,8 +250,8 @@ public class firstController{
 		return mav;
 	}
 	
-	@RequestMapping("/products/{cName}")
-	public ModelAndView productByCategory(@PathVariable("cName") String cName){
+	@RequestMapping("/productsbycategory/{cName}")
+	public ModelAndView listProductByCategory(@PathVariable("cName") String cName){
 		
 		ModelAndView mav = new ModelAndView("allProducts");
 		
@@ -259,12 +259,13 @@ public class firstController{
 		
 		String catList = new Gson().toJson(list);
 		mav.addObject("Products",catList);
+		System.out.println(catList);
 		
 		return mav;	
 	}
 	
-	@RequestMapping("/products/{pBrnd}")
-	public ModelAndView productsBtBrand(@PathVariable("pBrand") String pBrands){
+	@RequestMapping("/productbybrand/{pBrand}")
+	public ModelAndView listProductsByBrand(@PathVariable("pBrand") String pBrands){
 		
 		ModelAndView mav = new ModelAndView("allProducts");
 		
@@ -531,6 +532,7 @@ public class firstController{
 			mav.addObject("ProductName", p.getpName());
 			mav.addObject("ProductDescription", p.getpDescription());
 			mav.addObject("ProductCategory", p.getpCategory());
+			mav.addObject("ProductBrand",p.getpBrand());
 			mav.addObject("ProductPrice", p.getpPrice());
 			mav.addObject("ProductQty", p.getpQuantity());
 			mav.addObject("ProductImg", p.getpImage());

@@ -30,6 +30,10 @@
 				<br>
 				<form:input path="pId" type="hidden" />
 				
+				   <form:label path="pBrand">Product Brand</form:label>
+                 <form:input type="text" path="pBrand" class="form-control"/>
+				<br>
+				
 				<form:label path="pName">Product Category</form:label>
 				
 			<form:select path="pCategory" class="form-control" >

@@ -8,7 +8,7 @@
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
 <c:import url="/head-meta" />
 
 </head>
@@ -81,6 +81,19 @@
 															.error('Error while Sending Data.');
 												});
 							} ]);
+	
+	
+	
+	function printDiv(divName) {
+	     var printContents = document.getElementById(divName).innerHTML;
+	     var originalContents = document.body.innerHTML;
+
+	     document.body.innerHTML = printContents;
+
+	     window.print();
+
+	     document.body.innerHTML = originalContents;
+	}
 </script>
 
 
@@ -96,6 +109,60 @@
 <hr/>
 
 	<div class="container">
+	
+	<div class="col-md-6 col-md-offset-3" id="printableArea">
+		
+		<div class="panel panel-default">
+		<div class="panel-heading">Invoice</div>
+		<table width="100%" class="table">
+		 	<thead align="center">
+				<tr >
+					<th></th>
+					<th></th>
+					<th></th>
+					<th style="text-align: center">Quantity</th>
+					<th style="text-align: center">Price </th>
+				</tr>
+			</thead>
+			
+			<tbody align="center">
+			<tr ng-repeat="x in data" >
+				<td>{{$index+1}}</td>
+				<td><img ng-src="${pageContext.request.contextPath}/{{ x.ProductImage }}" height=" 30px" width="80px" class="img img-responsive img-thumbnail">
+					</td>
+				<td>{{x.ProductName}}</td>
+				<td >{{x.ProductQty}} </td>
+				<td>&#8377{{x.ProductPrice}}</td>
+			</tr>
+			<tr align="center">
+			<td colspan="3"></td>
+			<td>
+			<b>Total Price:</b>
+				</td><td>
+				<b>&#8377{{TotalPrice}}</b>
+			</td>
+			</tr>
+			</tbody>
+			</table>
+			<br/>
+			
+				<div style="margin:10px">
+				<b>Shipping Address:</b><br/>
+				{{shippingAddress}}
+				</div>
+				<div  style="margin:10px">
+				<b>Billing Address:</b><br/>
+				{{billingAddress}}
+				</div>
+			
+		</div>
+		
+	</div>
+	
+	<input type="button" onclick="printDiv('printableArea')" value="print a div!" />
+	
+	<%-- 
+	--------------------------------------
 	
 	
 	<div class="col-md-6">
@@ -154,7 +221,7 @@
 					
 	
 	
-	</div>
+	</div> --%>
 	
 	
 	</div>

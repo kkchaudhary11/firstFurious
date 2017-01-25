@@ -128,7 +128,7 @@
 		class="btn btn-danger btn pull-left">Back To Cart</a>
 
 	<a href="${flowExecutionUrl}&_eventId=ViewCompleteOrder"
-		class="btn btn-warning btn pull-right">Confirm Details</a>
+		class="btn btn-warning btn pull-right" ng-click="UpdateAddresses()" >Confirm Details</a>
 </div>
 	<hr>	
 		
