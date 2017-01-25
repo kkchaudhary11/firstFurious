@@ -81,18 +81,16 @@
 															.error('Error while Sending Data.');
 												});
 							} ]);
-	
-	
-	
+
 	function printDiv(divName) {
-	     var printContents = document.getElementById(divName).innerHTML;
-	     var originalContents = document.body.innerHTML;
+		var printContents = document.getElementById(divName).innerHTML;
+		var originalContents = document.body.innerHTML;
 
-	     document.body.innerHTML = printContents;
+		document.body.innerHTML = printContents;
 
-	     window.print();
+		window.print();
 
-	     document.body.innerHTML = originalContents;
+		document.body.innerHTML = originalContents;
 	}
 </script>
 
@@ -101,67 +99,64 @@
 	<c:import url="/head" />
 	<div class="container">
 		<a href="${flowExecutionUrl}&_eventId=BackToConfirmDetails"
-			class="btn btn-danger btn pull-left">Back To Update Address</a>
-		<a href="${flowExecutionUrl}&_eventId=ConfirmOrder"
+			class="btn btn-danger btn pull-left">Back To Update Address</a> <a
+			href="${flowExecutionUrl}&_eventId=ConfirmOrder"
 			class="btn btn-warning btn pull-right">Confirm Order</a>
 	</div>
 
-<hr/>
+	<hr />
 
 	<div class="container">
-	
-	<div class="col-md-6 col-md-offset-3" id="printableArea">
-		
-		<div class="panel panel-default">
-		<div class="panel-heading">Invoice</div>
-		<table width="100%" class="table">
-		 	<thead align="center">
-				<tr >
-					<th></th>
-					<th></th>
-					<th></th>
-					<th style="text-align: center">Quantity</th>
-					<th style="text-align: center">Price </th>
-				</tr>
-			</thead>
-			
-			<tbody align="center">
-			<tr ng-repeat="x in data" >
-				<td>{{$index+1}}</td>
-				<td><img ng-src="${pageContext.request.contextPath}/{{ x.ProductImage }}" height=" 30px" width="80px" class="img img-responsive img-thumbnail">
-					</td>
-				<td>{{x.ProductName}}</td>
-				<td >{{x.ProductQty}} </td>
-				<td>&#8377{{x.ProductPrice}}</td>
-			</tr>
-			<tr align="center">
-			<td colspan="3"></td>
-			<td>
-			<b>Total Price:</b>
-				</td><td>
-				<b>&#8377{{TotalPrice}}</b>
-			</td>
-			</tr>
-			</tbody>
-			</table>
-			<br/>
-			
-				<div style="margin:10px">
-				<b>Shipping Address:</b><br/>
-				{{shippingAddress}}
+
+		<div class="col-md-6 col-md-offset-3" id="printableArea">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Invoice</div>
+				<table width="100%" class="table">
+					<thead align="center">
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th style="text-align: center">Quantity</th>
+							<th style="text-align: center">Price</th>
+						</tr>
+					</thead>
+
+					<tbody align="center">
+						<tr ng-repeat="x in data">
+							<td>{{$index+1}}</td>
+							<td><img
+								ng-src="${pageContext.request.contextPath}/{{ x.ProductImage }}"
+								height=" 30px" width="80px"
+								class="img img-responsive img-thumbnail"></td>
+							<td>{{x.ProductName}}</td>
+							<td>{{x.ProductQty}}</td>
+							<td>&#8377{{x.ProductPrice}}</td>
+						</tr>
+						<tr align="center">
+							<td colspan="3"></td>
+							<td><b>Total Price:</b></td>
+							<td><b>&#8377{{TotalPrice}}</b></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+
+				<div style="margin: 10px">
+					<b>Shipping Address:</b><br /> {{shippingAddress}}
 				</div>
-				<div  style="margin:10px">
-				<b>Billing Address:</b><br/>
-				{{billingAddress}}
+				<div style="margin: 10px">
+					<b>Billing Address:</b><br /> {{billingAddress}}
 				</div>
-			
+			</div>
+
 		</div>
-		
-	</div>
-	
-	<input type="button" onclick="printDiv('printableArea')" value="print a div!" />
-	
-	<%-- 
+
+		<input type="button" onclick="printDiv('printableArea')"
+			value="print a div!" />
+
+		<%-- 
 	--------------------------------------
 	
 	
@@ -222,10 +217,10 @@
 	
 	
 	</div> --%>
-	
-	
+
+
 	</div>
-	
+
 </body>
 
 </html>
