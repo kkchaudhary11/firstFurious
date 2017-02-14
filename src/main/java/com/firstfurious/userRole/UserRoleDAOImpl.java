@@ -59,7 +59,7 @@ public class UserRoleDAOImpl implements UserRoleDAO
 			
 			if( ur == null )
 			{
-				ur = new UserRole("USER" , 1);
+				ur = new UserRole("ROLE_USER" , 1);
 				
 				this.insertUserRole(ur);
 			}
@@ -68,7 +68,7 @@ public class UserRoleDAOImpl implements UserRoleDAO
 			
 			if( ur == null )
 			{
-				ur = new UserRole("ADMIN" , 2);
+				ur = new UserRole("ROLE_ADMIN" , 2);
 				
 				this.insertUserRole(ur);
 			}

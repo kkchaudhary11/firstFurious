@@ -170,6 +170,8 @@ public class firstController{
 		return mav;                                                                 
 	}
 	
+	//Category
+	
 	@RequestMapping("/addCategory")
 	public ModelAndView addCategory(){
 		ModelAndView model = new ModelAndView("addCategory");
@@ -237,6 +239,7 @@ public class firstController{
 	
 	//Product Section
 	
+	
 	@RequestMapping("/allProducts")
 	public ModelAndView allProducts(){
 		ModelAndView mav = new ModelAndView("allProducts");
@@ -276,8 +279,6 @@ public class firstController{
 		
 		return mav;	
 	}
-	
-	
 	
 	
 	@RequestMapping("/addProduct")

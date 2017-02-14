@@ -39,7 +39,7 @@
 				
 
 				<%
-					if (request.isUserInRole("ADMIN")) {
+					if (request.isUserInRole("ROLE_ADMIN")) {
 				%>
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/allCategories.jsp'}">class="active"</c:if>><a
@@ -62,7 +62,7 @@
 					<c:when test="${not empty pageContext.request.userPrincipal.name }">
 					
 					<%
-					if (request.isUserInRole("USER")) {
+					if (request.isUserInRole("ROLE_USER")) {
 				%>
 				<li
 					<c:if test="${pageContext.request.requestURI eq '/firstFurious/WEB-INF/views/initiateFlow.jsp'}">class="active"</c:if>><a

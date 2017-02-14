@@ -28,7 +28,7 @@
 	<hr>
 
 		<%
-			if(request.isUserInRole("ADMIN"))
+			if(request.isUserInRole("ROLE_ADMIN"))
 			{
 		%>
 					
@@ -107,7 +107,7 @@
 				</div>
 				
 				<%
-						if(request.isUserInRole("USER")){
+						if(request.isUserInRole("ROLE_USER")){
 					%>
 				<div class="col-md-12" align="center" style="margin-top:10px;">
 					<a href="${pageContext.request.contextPath}/view/{{x.pId}}" class="btn btn-warning btn-block btn-xs">VIEW</a>
@@ -115,7 +115,7 @@
 					<%} %>
 					
 					<%
-						if(request.isUserInRole("ADMIN"))
+						if(request.isUserInRole("ROLE_ADMIN"))
 						{
 					%>
 				<div class="col-md-12" align="center" style="margin-top:10px;">

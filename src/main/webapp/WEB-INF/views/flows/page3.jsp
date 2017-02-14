@@ -153,8 +153,8 @@
 
 		</div>
 
-		<input type="button" onclick="printDiv('printableArea')"
-			value="print a div!" />
+		<input type="button" class="btn btn-success btn-sm"
+			onclick="printDiv('printableArea')" value="Print" />
 
 		<%-- 
 	--------------------------------------
